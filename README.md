@@ -13,7 +13,7 @@ Perspect shifts the focus from conventional, top-down tools designed primarily f
 With Perspect, each developer is a significant player in their narrative and the broader journey towards a decentralized future. Their actions and contributions aren't just steps in their personal growth, but integral parts of a larger transformative picture. Perspect is more than a tool—it's a revolution, a celebration of the individual's power to create, innovate, and leave a lasting impact.
 
 ## How can I help?
-Check out the issues page and start to contribute! Please join our [Slack Community]{https://join.slack.com/t/perspectdev/shared_invite/zt-1ygljdxk2-Pb_Ubx9obiRSFtaFtubpLQ} to ask any questions and learn more.
+Check out the issues page and start to contribute! Also go to the Discussion section to share ideas and explore other discussions in progress. 
 
 <!--
 
