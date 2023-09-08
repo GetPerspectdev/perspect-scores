@@ -28,4 +28,3 @@ RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python
 
 COPY . .
 EXPOSE 5051
-CMD ["python3", "web.py"]
