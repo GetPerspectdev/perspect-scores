@@ -1,0 +1,10 @@
+streamlit
+json
+slack_sdk
+pandas
+gc
+os
+matplotlib
+seaborn
+markdown
+requests

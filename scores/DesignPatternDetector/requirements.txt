@@ -1,0 +1,10 @@
+gradio
+beautifulsoup4
+requests
+pandas
+langchain
+llama-cpp-python
+faiss-cpu
+datasets
+numpy
+shap

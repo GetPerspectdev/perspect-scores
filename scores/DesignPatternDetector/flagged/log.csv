@@ -1,0 +1,8 @@
+repo_url,dev_key,verbose,output,flag,username,timestamp
+https://github.com/IMJONEZZ/NLP,,True,"status: 200 | github repo: https://github.com/IMJONEZZ/NLP | 
+Files: ",,,2023-07-25 11:23:54.023870
+https://github.com/IMJONEZZ/NLP/,,True,"status: 200 | github repo: https://github.com/IMJONEZZ/NLP/ | 
+Files: Name: https://github.com/IMJONEZZ/NLP/blob/master/Formulas%20for%20NLP.pdf | Score: [1.2731625] | Closest: ['Python'] ['Flyweight']
+Name: https://github.com/IMJONEZZ/NLP/blob/master/How%20to%20download%20a%20Jupyter%20file%20system.ipynb | Score: [1.3355572] | Closest: ['Python'] ['Chain of Responsibility']",,,2023-07-25 11:57:36.083310
+https://github.com/IMJONEZZ/NLP,,True,,,,2023-07-25 15:05:25.435798
+https://github.com/GetPerspectdev/grepit,,True,,,,2023-07-25 15:22:25.951684

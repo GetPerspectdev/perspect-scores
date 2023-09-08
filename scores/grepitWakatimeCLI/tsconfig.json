@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "importHelpers": true,
+    "module": "commonjs",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "target": "es2019",
+    "skipLibCheck": true // THIS IS IMPORTANT FOR SOME REASON... RESEARCH THIS
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
