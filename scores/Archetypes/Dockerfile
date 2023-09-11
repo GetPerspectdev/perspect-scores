@@ -16,15 +16,16 @@ COPY . .
 # setting build related env vars
 ENV CUDA_DOCKER_ARCH=all
 ENV LLAMA_CUBLAS=1
-ENV PORT=5051
+ENV PORT=5050
+# build with cuda
+ENV CMAKE_ARGS="-DLLAMA_CUBLAS=on"
+ENV FORCE_CMAKE=1
 
 # Install depencencies
 RUN pip install --upgrade pip
 RUN pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings
 RUN pip install -r requirements.txt
 
-# Install llama-cpp-python (build with cuda)
-RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python
-
 COPY . .
-EXPOSE 5051
+EXPOSE 5050
+CMD ["python3", "web.py"]

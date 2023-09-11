@@ -3,3 +3,4 @@ pandas
 langchain
 gradio
 flask
+llama-cpp-python
