@@ -28,4 +28,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 EXPOSE 80
-CMD ["gunicorn", "-w" ,"4", "web:app"]
+CMD ["gunicorn", "web:app"]
