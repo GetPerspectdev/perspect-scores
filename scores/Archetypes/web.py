@@ -4,11 +4,11 @@ from repo_app import predict_archetype
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
-def say_hello():
+@app.route("/archetype-api/health", methods=["GET"])
+def health_check():
     return jsonify({"msg": "GH Archetypes API"})
 
-@app.route("/archetype", methods=["GET"])
+@app.route("/archetype-api/calculate", methods=["GET"])
 def get_design_patterns():
     args = request.args
     github_repo = args['github_repo']

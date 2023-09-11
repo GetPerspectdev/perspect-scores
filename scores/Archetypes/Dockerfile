@@ -16,7 +16,7 @@ COPY . .
 # setting build related env vars
 ENV CUDA_DOCKER_ARCH=all
 ENV LLAMA_CUBLAS=1
-ENV PORT=5050
+ENV PORT=80
 # build with cuda
 ENV CMAKE_ARGS="-DLLAMA_CUBLAS=on"
 ENV FORCE_CMAKE=1
@@ -27,5 +27,5 @@ RUN pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvico
 RUN pip install -r requirements.txt
 
 COPY . .
-EXPOSE 5050
+EXPOSE 80
 CMD ["python3", "web.py"]
