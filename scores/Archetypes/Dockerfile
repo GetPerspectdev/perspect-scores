@@ -23,9 +23,9 @@ ENV FORCE_CMAKE=1
 
 # Install depencencies
 RUN pip install --upgrade pip
-RUN pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings
+RUN pip install --upgrade pip pytest cmake scikit-build setuptools fastapi uvicorn sse-starlette pydantic-settings gunicorn
 RUN pip install -r requirements.txt
 
 COPY . .
 EXPOSE 80
-CMD ["python3", "web.py"]
+CMD ["gunicorn", "-w" ,"4", "web:app"]
