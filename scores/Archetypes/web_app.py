@@ -11,7 +11,6 @@ from langchain.chains import LLMChain, LLMMathChain, TransformChain, SequentialC
 from langchain.chains import ConversationChain
 from langchain.chains.conversation.memory import  ConversationSummaryBufferMemory, ConversationBufferWindowMemory
 
-import gradio as gr
 import json
 
 # Authentication is defined via github.Auth
@@ -20,7 +19,7 @@ from github import Auth
 # Briton token to test
 # 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
 
-def predict_archetype(user_token, desired_repo):
+def predict_archetype(user_token, desired_repo, llm):
     auth = Auth.Token(user_token)
     target_repo = desired_repo
     # Public Web Github
@@ -98,14 +97,6 @@ def predict_archetype(user_token, desired_repo):
     The Star Wars class and character that personifies this person is"""
 
     arch_prompt_template = PromptTemplate(input_variables=['data'], template=arch_template)
-
-    llm = LlamaCpp(
-        model_path="./models/llongma-7b-gguf-q5_K_M.bin",
-        n_gpu_layers=35,
-        n_batch=512,
-        n_ctx=8000,
-        verbose=True
-        )
 
     arch_chain = LLMChain(llm=llm, prompt=arch_prompt_template)
 

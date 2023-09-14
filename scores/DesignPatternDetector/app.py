@@ -32,14 +32,14 @@ code_template = """Below is an instruction that describes a task, paired with an
             ###Response:
             The closest design pattern to this code is"""
 code_prompt_template = PromptTemplate(input_variables=['code'], template=code_template)
-llm = LlamaCpp(
-    model_path="./models/hermes-llongma-2-7b-8k.ggmlv3.q5_K_M.bin",
-    n_gpu_layers=0,
-    n_batch=512,
-    n_ctx=8192,
-    verbose=True
-    )
-code_chain = LLMChain(llm=llm, prompt=code_prompt_template)
+# llm = LlamaCpp(
+#     model_path="./models/hermes-llongma-2-7b-8k.ggmlv3.q5_K_M.bin",
+#     n_gpu_layers=0,
+#     n_batch=512,
+#     n_ctx=8192,
+#     verbose=True
+#     )
+# code_chain = LLMChain(llm=llm, prompt=code_prompt_template)
 
 CODE_FILES = ['.cgi','.cmd','.pl','.class','.cpp','.css','.h','.html','.java','.php','.py','.ipynb','.sh','.swift']
 
@@ -70,7 +70,8 @@ def format_and_record_files():
 def print_nice():
     pass
 
-def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=ds):
+def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=ds, llm):
+    code_chain = LLMChain(llm=llm, prompt=code_prompt_template)
     url_tree = [repo_url]
     file_urls = []
     contents = []
