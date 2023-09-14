@@ -70,7 +70,7 @@ def format_and_record_files():
 def print_nice():
     pass
 
-def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=ds, llm):
+def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=ds, llm=None):
     code_chain = LLMChain(llm=llm, prompt=code_prompt_template)
     url_tree = [repo_url]
     file_urls = []
