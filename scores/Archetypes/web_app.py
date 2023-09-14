@@ -1,10 +1,14 @@
 # Needed to install brew
 # pip3 install PyGithub
 # pip install urllip3==1.26.6
+from typing import Dict
 
+import os
+import boto3
 from github import Github
 import pandas as pd
-from langchain import PromptTemplate
+from langchain import PromptTemplate, SagemakerEndpoint
+from langchain.llms.sagemaker_endpoint import LLMContentHandler
 from langchain.llms import LlamaCpp
 from langchain.chains import LLMChain, LLMMathChain, TransformChain, SequentialChain, SimpleSequentialChain
 
@@ -13,13 +17,16 @@ from langchain.chains.conversation.memory import  ConversationSummaryBufferMemor
 
 import json
 
+ENDPOINT_NAME = os.environ.get('SM_ENDPOINT_NAME')
+runtime= boto3.client('runtime.sagemaker')
+
 # Authentication is defined via github.Auth
 from github import Auth
 
 # Briton token to test
 # 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
 
-def predict_archetype(user_token, desired_repo, llm):
+def predict_archetype(user_token, desired_repo):
     auth = Auth.Token(user_token)
     target_repo = desired_repo
     # Public Web Github
@@ -97,6 +104,37 @@ def predict_archetype(user_token, desired_repo, llm):
     The Star Wars class and character that personifies this person is"""
 
     arch_prompt_template = PromptTemplate(input_variables=['data'], template=arch_template)
+
+    # llm = LlamaCpp(
+    #     model_path="./models/llongma-7b-gguf-q5_K_M.bin",
+    #     n_gpu_layers=35,
+    #     n_batch=512,
+    #     n_ctx=8000,
+    #     verbose=True
+    #     )
+
+    class ContentHandler(LLMContentHandler):
+        content_type = "application/json"
+        accepts = "application/json"
+
+        def transform_input(self, prompt: str, model_kwargs: Dict) -> bytes:
+            input_str = json.dumps({"inputs": prompt, **model_kwargs})
+            return input_str.encode("utf-8")
+
+        def transform_output(self, output: bytes) -> str:
+            response_json = json.loads(output.read().decode("utf-8"))
+            return response_json[0]["generation"]
+
+
+    content_handler = ContentHandler()
+
+    llm = SagemakerEndpoint(
+        endpoint_name="jumpstart-dft-meta-textgeneration-llama-2-7b",
+        region_name="us-west-2",
+        model_kwargs={"parameters": {"max_new_tokens": 100}},
+        content_handler=content_handler,
+        endpoint_kwargs={"CustomAttributes":"accept_eula=true"}
+    )
 
     arch_chain = LLMChain(llm=llm, prompt=arch_prompt_template)
 

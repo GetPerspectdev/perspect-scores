@@ -1,6 +1,6 @@
 import os
 from flask import Flask, jsonify, request
-from repo_app import predict_archetype
+from web_app import predict_archetype
 
 app = Flask(__name__)
 

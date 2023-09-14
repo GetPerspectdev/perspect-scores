@@ -4,3 +4,4 @@ langchain
 gradio
 flask
 llama-cpp-python
+boto3
