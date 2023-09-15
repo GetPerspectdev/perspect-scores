@@ -82,60 +82,60 @@ def predict_convo(input: str, message_history: list, review_chain=None):
     obj = json.dumps({"professionalism": professionalism}, indent=4)
     return obj
 
-@cl.author_rename
-def rename(orig_author: str):
-    rename_dict = {"RetrievalPerspectScores": "LLM advice"}
-    return rename_dict.get(orig_author, orig_author)
+# @cl.author_rename
+# def rename(orig_author: str):
+#     rename_dict = {"RetrievalPerspectScores": "LLM advice"}
+#     return rename_dict.get(orig_author, orig_author)
 
-@cl.on_chat_start
-async def init():
-    msg = cl.Message(content=f"Building Index...")
-    await msg.send()
+# @cl.on_chat_start
+# async def init():
+#     msg = cl.Message(content=f"Building Index...")
+#     await msg.send()
 
-    #build FAISS
-    dataset = load_dataset('csv', data_files="./data/embedded_dataset.csv", split='train')
-    if not os.path.exists("./data/professionalism_index.faiss"):
-        emb_ds = dataset.map(embed_texts, batched=False)
-        emb_ds.to_csv("./data/embedded_dataset.csv")
-        emb_ds.add_faiss_index("embedding")
-        emb_ds.save_faiss_index('embedding', './data/professionalism_index.faiss')
-        dataset = load_dataset('csv', data_files="./data/embedded_dataset.csv", split='train')
-    dataset.load_faiss_index('embedding', './data/professionalism_index.faiss')
+#     #build FAISS
+#     dataset = load_dataset('csv', data_files="./data/embedded_dataset.csv", split='train')
+#     if not os.path.exists("./data/professionalism_index.faiss"):
+#         emb_ds = dataset.map(embed_texts, batched=False)
+#         emb_ds.to_csv("./data/embedded_dataset.csv")
+#         emb_ds.add_faiss_index("embedding")
+#         emb_ds.save_faiss_index('embedding', './data/professionalism_index.faiss')
+#         dataset = load_dataset('csv', data_files="./data/embedded_dataset.csv", split='train')
+#     dataset.load_faiss_index('embedding', './data/professionalism_index.faiss')
 
-    #LLM
-    llm = LlamaCpp(
-            model_path="./models/llongma-7b-gguf-q4_0.bin",
-            n_gpu_layers=1,
-            n_batch=512,
-            n_ctx=8192,
-            verbose=True
-            )
+#     #LLM
+#     llm = LlamaCpp(
+#             model_path="./models/llongma-7b-gguf-q4_0.bin",
+#             n_gpu_layers=1,
+#             n_batch=512,
+#             n_ctx=8192,
+#             verbose=True
+#             )
 
-    #RAG class
-    llm_chain = RetrievalAugmentedQAPipeline(
-         dataset, 
-         llm, 
-         True, 
-         embedder, 
-         number_template
-    )
+#     #RAG class
+#     llm_chain = RetrievalAugmentedQAPipeline(
+#          dataset, 
+#          llm, 
+#          True, 
+#          embedder, 
+#          number_template
+#     )
 
-    # Store the chain in the user session
-    cl.user_session.set("llm_chain", llm_chain)
+#     # Store the chain in the user session
+#     cl.user_session.set("llm_chain", llm_chain)
 
-    # Get Slack message history
-    message_history = ['Hey',"What's up"]
+#     # Get Slack message history
+#     message_history = ['Hey',"What's up"]
 
-    cl.user_session.set("history", message_history)
+#     cl.user_session.set("history", message_history)
 
-@cl.on_message
-async def main(message: str):
-    # Retrieve the chain and history from the user session
-    llm_chain = cl.user_session.get("llm_chain")
+# @cl.on_message
+# async def main(message: str):
+#     # Retrieve the chain and history from the user session
+#     llm_chain = cl.user_session.get("llm_chain")
 
-    history = cl.user_session.get("history")
+#     history = cl.user_session.get("history")
 
-    # Call the chain asyncronously
-    res = await cl.make_async(predict_convo)(message, history, llm_chain)
+#     # Call the chain asyncronously
+#     res = await cl.make_async(predict_convo)(message, history, llm_chain)
 
-    await cl.Message(content=res).send()
+#     await cl.Message(content=res).send()

@@ -1,4 +1,5 @@
 import requests 
+from typing import Dict
 from bs4 import BeautifulSoup
 import pandas as pd
 from urllib.parse import urljoin
@@ -7,15 +8,16 @@ from collections import Counter
 import math
 
 from langchain import PromptTemplate
-from langchain.llms import LlamaCpp
+from langchain.llms import SagemakerEndpoint
+from langchain.llms.sagemaker_endpoint import LLMContentHandler
 from langchain.chains import LLMChain #, SimpleSequentialChain
 #from langchain.embeddings import LlamaCppEmbeddings
 from gpt4all import Embed4All
 from datasets import load_dataset
 import numpy as np
 
-# ds = load_dataset('csv', data_files="./data/embedded_gpt_faiss_ds.csv", split='train')
-# ds.load_faiss_index('embedding', './data/gpt_index.faiss')
+ds = load_dataset('csv', data_files="./scores/DesignPatternDetector/data/embedded_gpt_faiss_ds.csv", split='train')
+ds.load_faiss_index('embedding', './scores/DesignPatternDetector/data/gpt_index.faiss')
 # knn = 1
 # rn, nl = "\r\n\r\n", "\n"
 
@@ -49,29 +51,52 @@ def get_files(paths, file_name):
             return "a"
     return None
 
-def parse_tree_urls():
-    pass
+# def parse_tree_urls():
+#     pass
 
-def parse_file_urls_from_tree():
-    pass
+# def parse_file_urls_from_tree():
+#     pass
 
-def get_content_from_file_urls():
-    pass
+# def get_content_from_file_urls():
+#     pass
 
-def embed_content():
-    pass
+# def embed_content():
+#     pass
 
-def query_and_score():
-    pass
+# def query_and_score():
+#     pass
 
-def format_and_record_files():
-    pass
+# def format_and_record_files():
+#     pass
 
-def print_nice():
-    pass
+# def print_nice():
+#     pass
+class ContentHandler(LLMContentHandler):
+    content_type = "application/json"
+    accepts = "application/json"
 
-def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=None, llm=None):
-    code_chain = LLMChain(llm=llm, prompt=code_prompt_template)
+    def transform_input(self, prompt: str, model_kwargs: Dict) -> bytes:
+        input_str = json.dumps({"inputs": prompt, **model_kwargs})
+        return input_str.encode("utf-8")
+
+    def transform_output(self, output: bytes) -> str:
+        response_json = json.loads(output.read().decode("utf-8"))
+        return response_json[0]["generation"]
+    
+content_handler = ContentHandler()
+
+llm=SagemakerEndpoint(
+            endpoint_name="jumpstart-dft-meta-textgeneration-llama-2-7b",
+            region_name="us-west-2",
+            model_kwargs={"parameters": {"max_new_tokens": 50}},
+            content_handler=content_handler,
+            endpoint_kwargs={"CustomAttributes":"accept_eula=true"}
+        )
+
+code_chain = LLMChain(llm=llm, prompt=code_prompt_template)
+
+
+def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=ds, llm=llm):
     url_tree = [repo_url]
     file_urls = []
     contents = []
