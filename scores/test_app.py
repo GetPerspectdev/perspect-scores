@@ -35,9 +35,7 @@ arch_template = """Below is an instruction that describes a task, paired with an
 
     ###Input:
     GitHub Activity Data:
-    {examples}
-    {message_history}
-    {current_message}
+    {data}
 
     ###Example Response:
     Jedi Knight, Anakin Skywalker, because you get a lot done as evidenced by the number of your commits.
@@ -72,14 +70,14 @@ async def init():
     #build datasets and FAISS
     msg = cl.Message(content=f"Building FAISS indexes and loading data...")
     await msg.send()
-    archetypes_ds = load_dataset('csv', data_files="./Archetypes/data/embedded_llama_faiss_ds.csv", split="train")
-    archetypes_ds.load_faiss_index('embedding', './Archetypes/data/gpt_index.faiss')
+    archetypes_ds = load_dataset('csv', data_files="./scores/Archetypes/data/embedded_llama_faiss_ds.csv", split="train")
+    archetypes_ds.load_faiss_index('embedding', './scores/Archetypes/data/gpt_index.faiss')
 
-    designpatterns_ds = load_dataset('csv', data_files="./DesignPatternDetector/data/embedded_gpt_faiss_ds.csv", split="train")
-    designpatterns_ds.load_faiss_index('embedding', './DesignPatternDetector/data/gpt_index.faiss')
+    designpatterns_ds = load_dataset('csv', data_files="./scores/DesignPatternDetector/data/embedded_gpt_faiss_ds.csv", split="train")
+    designpatterns_ds.load_faiss_index('embedding', './scores/DesignPatternDetector/data/gpt_index.faiss')
 
-    professionalism_ds = load_dataset('csv', data_files='./PerspecToolformer/data/embedded_dataset.csv', split='train')
-    professionalism_ds.load_faiss_index('embedding', './PerspecToolformer/data/professionalism_index.faiss')
+    professionalism_ds = load_dataset('csv', data_files='./scores/PerspecToolformer/data/embedded_dataset.csv', split='train')
+    professionalism_ds.load_faiss_index('embedding', './scores/PerspecToolformer/data/professionalism_index.faiss')
 
 
     msg = cl.Message(content=f"Loading Models...")
@@ -100,6 +98,24 @@ async def init():
     msg = cl.Message(content=f"chaining models...")
     await msg.send()
 
-    archetype_chain = RetrievalAugmentedQAPipeline(vector_db=archetypes_ds, llm=llm, verbose=False, embedder=EMBEDDER, template=)
-    designpattern_chain = RetrievalAugmentedQAPipeline()
-    professionalism_chain = RetrievalAugmentedQAPipeline()
+    professionalism_template = PromptTemplate(input_variables=["examples", "message_history", "current_message"], template=number_template)
+
+    professionalism_chain = RetrievalAugmentedQAPipeline(vector_db=professionalism_ds, llm=llm, verbose=False, embedder=EMBEDDER, template=professionalism_template)
+
+    cl.user_session.set("llm", llm)
+    cl.user_session.set("design_ds", designpatterns_ds)
+    cl.user_session.set("professionalism", professionalism_chain)
+
+@cl.on_message
+async def main(message: str):
+    llm = cl.user_session.get("llm")
+    design_ds = cl.user_session.get("design_ds")
+    professionalism = cl.user_session.get("professionalism")
+
+    archetype = await cl.make_async(predict_archetype)(user_token="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", desired_repo="perspect-scores")
+    designpattern = await cl.make_async(get_github)("https://github.com/rphovley/storymakerevents", branch='main', verbose=False, dataset=design_ds, llm=llm)
+    prof_score = await cl.make_async(professionalism.run_pipeline)(message, "")
+
+    res = {"archetype": archetype, "design_pattern": designpattern, "professionalism": prof_score}
+
+    await cl.Message(content=res).send()

@@ -14,12 +14,12 @@ from gpt4all import Embed4All
 from datasets import load_dataset
 import numpy as np
 
-ds = load_dataset('csv', data_files="./data/embedded_gpt_faiss_ds.csv", split='train')
-ds.load_faiss_index('embedding', './data/gpt_index.faiss')
-knn = 1
-rn, nl = "\r\n\r\n", "\n"
+# ds = load_dataset('csv', data_files="./data/embedded_gpt_faiss_ds.csv", split='train')
+# ds.load_faiss_index('embedding', './data/gpt_index.faiss')
+# knn = 1
+# rn, nl = "\r\n\r\n", "\n"
 
-embedder = Embed4All()
+# embedder = Embed4All()
 code_template = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
             ###Instruction:
             You are an expert programming assistant who will tell the truth, even if the truth is that they don't know.
@@ -70,7 +70,7 @@ def format_and_record_files():
 def print_nice():
     pass
 
-def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=ds, llm=None):
+def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=None, llm=None):
     code_chain = LLMChain(llm=llm, prompt=code_prompt_template)
     url_tree = [repo_url]
     file_urls = []
@@ -238,13 +238,23 @@ def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=ds, l
         resource = "No resource"
 
     if verbose:
-        return {
-          "design_pattern": eval, 
-          "repo_url": repo_url, 
-          "num_files": num_files, 
-          "overall_score": str(score), 
-          "top_3_patterns": top_pattern,
-          "bot_3_patterns": bot_pattern, 
-          "resource": resource, 
-          "files": np.asarray(pp).tolist()
-        }
+        print({
+        "design_pattern": eval, 
+        "repo_url": repo_url, 
+        "num_files": num_files, 
+        "overall_score": str(score), 
+        "top_3_patterns": top_pattern,
+        "bot_3_patterns": bot_pattern, 
+        "resource": resource, 
+        "files": np.asarray(pp).tolist()
+    })
+    return {
+        "design_pattern": eval, 
+        "repo_url": repo_url, 
+        "num_files": num_files, 
+        "overall_score": str(score), 
+        "top_3_patterns": top_pattern,
+        "bot_3_patterns": bot_pattern, 
+        "resource": resource, 
+        "files": np.asarray(pp).tolist()
+    }
