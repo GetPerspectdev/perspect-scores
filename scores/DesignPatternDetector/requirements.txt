@@ -1,6 +1,6 @@
 boto3
 gradio
-gpt4all
+gpt4all==1.0.5
 beautifulsoup4
 requests
 pandas
