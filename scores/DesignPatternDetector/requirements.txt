@@ -9,3 +9,4 @@ datasets
 numpy
 shap
 flask
+gpt4all

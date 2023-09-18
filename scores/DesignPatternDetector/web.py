@@ -4,11 +4,11 @@ from web_app import get_github
 
 app = Flask(__name__)
 
-@app.route("/design-patterns-api/health", methods=["GET"])
+@app.route("/patterns-api/health", methods=["GET"])
 def health_check():
     return jsonify({"msg": "GH Design Patterns API"})
 
-@app.route("/design-patterns-api/calculate", methods=["GET"])
+@app.route("/patterns-api/calculate", methods=["GET"])
 def get_design_patterns():
     args = request.args
     github_repo = args['github_repo']
