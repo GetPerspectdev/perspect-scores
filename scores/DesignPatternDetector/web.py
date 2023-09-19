@@ -14,8 +14,9 @@ def get_design_patterns():
     github_repo = args['github_repo']
     dev_key = args.get('gh_key', '')
     branch = args.get('branch', 'main')
+    debug = args.get('debug', False)
     print(args)
-    return get_github(github_repo, dev_key, branch)
+    return get_github(github_repo, dev_key, branch, debug)
 
 if __name__ == "__main__":
     debug = os.environ.get("DEBUG", False)
