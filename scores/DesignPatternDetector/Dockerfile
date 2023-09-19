@@ -28,4 +28,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 EXPOSE 80
-CMD ["gunicorn", "web:app", "--timeout", "0"]
+CMD ["gunicorn", "--timeout", "0", "web:app"]
