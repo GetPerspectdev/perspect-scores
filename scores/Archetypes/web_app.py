@@ -17,14 +17,18 @@ from langchain.chains.conversation.memory import  ConversationSummaryBufferMemor
 
 import json
 
+print("we got here")
 ENDPOINT_NAME = os.environ.get('SM_ENDPOINT_NAME')
-runtime= boto3.client('runtime.sagemaker')
+runtime= boto3.client('runtime.sagemaker', region_name='us-west-2',
+                      aws_access_key_id='AKIAUP67XQF3XIOJBBP2',
+                      aws_secret_access_key='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')
 
+print("now here")
 # Authentication is defined via github.Auth
 from github import Auth
 
 # Briton token to test
-# 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
+# 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
 
 def predict_archetype(user_token, desired_repo):
     auth = Auth.Token(user_token)
