@@ -11,3 +11,5 @@ datasets
 numpy
 shap
 flask
+psycopg
+psycopg_binary

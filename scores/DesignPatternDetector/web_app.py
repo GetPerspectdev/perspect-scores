@@ -95,8 +95,7 @@ llm=SagemakerEndpoint(
 
 code_chain = LLMChain(llm=llm, prompt=code_prompt_template)
 
-
-def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=ds, llm=llm):
+def get_github(repo_url, branch="main", verbose=False, dataset=ds):
     url_tree = [repo_url]
     file_urls = []
     contents = []
