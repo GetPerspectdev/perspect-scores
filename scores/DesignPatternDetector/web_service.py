@@ -22,12 +22,12 @@ class ScoreProcessor:
         print("Processing score")
         self.running_score = True
         print(repo_url, score_id, branch, verbose, dataset)
-        self.conn.cursor().execute("UPDATE scores.user_score SET score_status = 'CALCULATING', modified_on = %s WHERE id = %s", (datetime.now(), score_id))
+        self.conn.cursor().execute("UPDATE scores.user_score SET score_status = 'CALCULATING', updated_at = %s WHERE id = %s", (datetime.now(), score_id))
         self.conn.commit()
         try:
           design_patterns = get_github(repo_url, branch, verbose, dataset)
-          self.conn.cursor().execute("UPDATE scores.user_score SET results = %s, modified_on = %s, score_status = 'SUCCESS' WHERE id = %s", (json.dumps(design_patterns), datetime.now(), score_id))
+          self.conn.cursor().execute("UPDATE scores.user_score SET results = %s, updated_at = %s, score_status = 'SUCCESS' WHERE id = %s", (json.dumps(design_patterns), datetime.now(), score_id))
         except Exception as e:
-          self.conn.cursor().execute("UPDATE scores.user_score SET meta = %s, modified_on = %s, score_status = 'ERROR' WHERE id = %s", (json.dumps({"error": str(e)}), datetime.now(), score_id))
+          self.conn.cursor().execute("UPDATE scores.user_score SET meta = %s, updated_at = %s, score_status = 'ERROR' WHERE id = %s", (json.dumps({"error": str(e)}), datetime.now(), score_id))
         self.conn.commit()
         self.running_score = False
