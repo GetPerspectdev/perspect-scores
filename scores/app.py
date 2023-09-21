@@ -24,12 +24,22 @@ class One_Class_To_Rule_Them_All():
         self.index_folder = darkness
         self.verbose = bind
         self.embedder = them
+        if self.verbose:
+            print("Loaded init!")
 
     def load_ds_and_idx(self, idx):
-        _, _, files = os.walk(self.ds_folder)
-        self.vectorDB = load_dataset('csv', data_files=files[idx], split='train')
-        _, _, files = os.walk(self.index_folder)
-        self.vectorDB.load_faiss_index('embedding', files[idx])
+        files = os.listdir(self.ds_folder)
+        files.sort()
+        # try:
+        self.vectorDB = load_dataset('csv', data_files=f"{self.ds_folder}/{files[idx]}", split='train')
+        # except:
+        #     print(f"Could not load {files[idx]}")
+        files = os.listdir(self.index_folder)
+        files.sort()
+        # try:
+        self.vectorDB.load_faiss_index('embedding', f"{self.index_folder}/{files[idx]}")
+        # except:
+        #     print(f"Could not load {files[idx]}")
 
     def embed_documents(self, examples):
         embedding = self.embedder.embed(examples['text'])
@@ -417,18 +427,20 @@ class One_Class_To_Rule_Them_All():
 
         messages = df['text'].values.tolist()
 
-        embeddings_list = []
-        for message in messages:
-            embed = self.embed_documents({"text": message})
-            embeddings_list.append(embed)
-        df['embedding'] = embeddings_list
+        # embeddings_list = []
+        # for message in messages:
+        #     if len(message)>0:
+        #         embed = self.embedder.embed(message)
+        #         embeddings_list.append(embed)
+        #     else:
+        #         continue
+        # df['embedding'] = embeddings_list
 
         message_history = []
         scores = []
         for message in messages:
             if self.verbose:
-                print()
-            print(f"Searching VectorDB for {message[:10]}...")
+                print(f"Searching VectorDB for {message[:10]}...")
             db_query = self.embedder.embed(message)
             db_query = np.array(db_query, dtype=np.float32)
             _, context_list = self.vectorDB.get_nearest_examples("embedding", db_query, k=3)
@@ -441,7 +453,7 @@ class One_Class_To_Rule_Them_All():
                 context_list['rating'], 
                 context_list['comment']
                 ):
-                score_string += f"Example: {similar_message}, Rating: {rating}, Reasoning{comment}\n"
+                score_string += f"Example: {similar_message}, Rating: {rating}, Reasoning: {comment}\n"
             if self.verbose:
                 print(f"Similar Messages from DB: {score_string}")
             
@@ -453,21 +465,18 @@ class One_Class_To_Rule_Them_All():
             if self.verbose:
                 print("Running Chain...")
 
-            if len(message_history) < 1:
-                message_history = ["No message history"][0]
-            elif len(message_history) == 1:
-                message_history = message_history[0]
-            else:
-                message_history = ",\n".join(message_history)
+            dumb_message = "No Message History"
+            if len(message_history) == 1:
+                dumb_message = message_history[0]
 
             obj = chain.run({
                 "examples": score_string,
-                "message_history": message_history,
+                "message_history": ",\n".join(message_history) if len(message_history) > 1 else dumb_message,
                 "current_message": message,
             })
             message_history.append(message)
             scores.append(obj)
 
         df['scores'] = scores
-        df.to_csv(f"./user_slack_data/{self_user}_messages.csv")
+        df.to_csv(f"./scores/user_slack_data/{self_user}_messages.csv")
         return df.to_json()
