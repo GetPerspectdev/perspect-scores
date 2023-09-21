@@ -35,6 +35,15 @@ if __name__ == "__main__":
     scorer.load_ds_and_idx(1)
     print("Loaded embeddings")
 
-    token = "xoxp-3014184694567-4200801421619-5941729850736-a2f501adb2223d429589e8553309db1f"
+    token = "xoxp-3014184694567-4200801421619-5918204969079-dc7524383be15002b7fe9f12deb4d119"
     obj = scorer.professionalism_score(slack_token=token)
+    print(obj)
+
+    scorer.load_ds_and_idx(0)
+    obj = scorer.designpatterns_score(repo_url="https://github.com/IMJONEZZ/NLP", branch="master")
+    print(obj)
+
+    github_token = ""
+    repo_name = ""
+    obj = scorer.archetype_score(user_token=github_token, repo_name=repo_name)
     print(obj)

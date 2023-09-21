@@ -1,0 +1,357 @@
+,timestamp,user,text
+0,1695330666.079699,U045WPKCDJ7,new slack token
+1,1695330662.508879,U045WPKCDJ7,xoxp-3014184694567-4200801421619-5918204969079-dc7524383be15002b7fe9f12deb4d119
+2,1695328984.399829,U045WPKCDJ7,my slack token
+3,1695328981.984669,U045WPKCDJ7,xoxp-3014184694567-4200801421619-5941729850736-a2f501adb2223d429589e8553309db1f
+8,1695136150.876819,U045WPKCDJ7,"Should I have been able to have permission, or did I miss something?"
+10,1695136098.961289,U045WPKCDJ7,"I pushed the changes, but I don't have permission to push to the perspect-scores repo, so I made a fork on it"
+11,1695079748.230939,U045WPKCDJ7,I put the code in the script and am finishing up putting in the slack data and chunking it as the array of message context gets larger. I’ll push my changes this evening.
+14,1695061782.297349,U045WPKCDJ7,"perfect, got it. thanks man!"
+18,1695059804.547009,U045WPKCDJ7,"Looks like I just need the following, hopefully not Session_token:
+
+aws_access_key_id=ACCESS_KEY,
+aws_secret_access_key=SECRET_KEY,
+aws_session_token=SESSION_TOKEN"
+19,1695059309.422299,U045WPKCDJ7,I don't have that. How do I go about that to get/input credentials?
+23,1695059227.045879,U045WPKCDJ7,What's the best way to do that?
+24,1695059218.720239,U045WPKCDJ7,"I'm getting this error when I'm trying to run sagemaker, but I don't want to hardcode our credentials into the code"
+26,1695059196.177639,U045WPKCDJ7,`botocore.exceptions.NoCredentialsError: Unable to locate credentials`
+28,1695054380.953609,U045WPKCDJ7,Yep
+30,1695052784.974969,U045WPKCDJ7,I'll work today on getting that all into app.py
+32,1695052770.826929,U045WPKCDJ7,I
+33,1695052767.244249,U045WPKCDJ7,"No worries, that's what I figured. I just wanted to make sure I wasn't missing anything."
+36,1695052620.031709,U045WPKCDJ7,"How do I run the test_app.py in scores to output in the terminal? It's running without errors, but it finishes on the message that says the model was found, then it doesn't go through any of the scores"
+37,1694793385.371059,U045WPKCDJ7,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
+38,1694723559.428449,U045WPKCDJ7,What about you?
+39,1694723311.768009,U045WPKCDJ7,I believe so
+41,1694721359.698069,U045WPKCDJ7,"I definitely will, thanks, haha"
+43,1694721305.036349,U045WPKCDJ7,"I agree, I think there's a lot more exciting things to do with it than they currently have in mind, but I plan on pitching it more to them when they're back"
+45,1694721276.418989,U045WPKCDJ7,"But since they want a set number of archetypes based on a matrix, we can just build it with a simple if/then"
+47,1694721248.797079,U045WPKCDJ7,All we would need to do is change the prompt in the archetype code. Right now it goes with the Star Wars responses
+50,1694721198.333739,U045WPKCDJ7,I think we're going with the one in the matrix because Demitri didn't like the other ones. He's been on the cruise this week
+52,1694713713.816999,U045WPKCDJ7,"Awesome, thanks man! I'll be sure to reach out to you with any questions"
+56,1694710746.407549,U045WPKCDJ7,Gotcha. So the biggest thing we need to integrate right now is just the code for pulling in slack data?
+59,1694708940.283099,U045WPKCDJ7,Sweet! I'll get working on moving my code to the same pattern you have in the PerspecToolformer updates.
+63,1694446103.385439,U045WPKCDJ7,Sounds good!
+65,1694445213.496379,U045WPKCDJ7,Yep! I'll get working today on finalizing those and moving them into the scores repo
+68,1694013574.467599,U045WPKCDJ7,"Which wizardcoder should I be using in different poc's of scores? I figure either the WizardCoder-Python-34B-V1.0-GGUF or the WizardCoder-Python-13B-V1.0-GGUF from The Bloke, using the 13b for testing"
+70,1693937719.039069,U045WPKCDJ7,"I’m in the cafe area eating right now, Seth went to the bathroom I think"
+71,1693937703.616679,U045WPKCDJ7,"Oh, we just grabbed some food from the cafe"
+74,1693590258.426209,U045WPKCDJ7,"this was definitely a huge learning curve for me, but I'm feeling a lot better after getting back into the weeks with llm's and Python in general"
+75,1693590224.109709,U045WPKCDJ7,"Just pushed the archetypes prototype to the GetPerspectdev/Archetype repo. I just passed it off to Andre to get it to run on AWS. I'm working on making the prompt better, testing it between different models, and improving the performance with the GitHub API, which is currently the slowest part of the whole process, especially if the user has been involved with large scale repo's like pylance."
+76,1693518325.472059,U045WPKCDJ7,"Gotcha, that makes sense"
+79,1693518244.778089,U045WPKCDJ7,What is the difference between GGUF and LTS? I can't even find what LTS stands for
+81,1693517012.284179,U045WPKCDJ7,excellent
+84,1693511948.788819,U045WPKCDJ7,"I'll keep it secure and won't abuse it, haha"
+85,1693511937.472109,U045WPKCDJ7,"Sweet, thanks!"
+93,1692719448.170159,U045WPKCDJ7,Are we also pulling in tweets now? Or is that just testing for now with RAG?
+94,1692719404.137719,U045WPKCDJ7,"Haha, the string for run_pipeline in the RAG test is hilarious"
+97,1692719110.407369,U045WPKCDJ7,Sweeet
+99,1692401100.381729,U045WPKCDJ7,Sounds great!
+102,1687469721.592789,U045WPKCDJ7,"Question: Of all the people you have lined up who want to buy over $3000 worth of nodes, how many of them do not have Ethereum ready to purchase those nodes?"
+104,1685735771.965909,U045WPKCDJ7,"Yo, let’s get some friendlies"
+105,1684424244.544869,U045WPKCDJ7,Thanks!
+106,1684424240.859109,U045WPKCDJ7,<https://web.polly.ai/3uqxew|https://web.polly.ai/3uqxew>
+108,1691100184.475239,U045WPKCDJ7,Thanks bro! You’re the man!
+110,1691096360.944819,U045WPKCDJ7,"I created a task and assigned it to you, Hyrum England on the data team has the code snippets you need to get it implemented. He’ll be the main point of contact for this while I’m gone until Thursday."
+111,1691096307.479069,U045WPKCDJ7,"Hey Matt, I’ve got some more front end Google analytics stuff for you, haha. Sorry to keep throwing this on you"
+112,1690210628.433279,U045WPKCDJ7,"Sweet, I'll keep an eye on Pendo when we push"
+114,1690208969.103719,U045WPKCDJ7,"Hey Matt, I'm not seeing any updated data for the Pendo data on the ecom site. Can you check to see what may be up with that? We may need to redo it on a new account if it isn't capturing data with our current Pendo subscription."
+116,1689629664.797209,U045WPKCDJ7,"Ok, sounds good! I’ll keep checking it as well"
+120,1689625614.333929,U045WPKCDJ7,I'm not seeing it. I just invited you to the Pendo app we currently have so you can see what I'm seeing
+122,1689625346.063849,U045WPKCDJ7,That api key is for a test app that we haven't finished installing that we might be able to use for the nodes sales
+123,1689625262.196179,U045WPKCDJ7,"Yes, but we can segment between the Prime app and the node sales site"
+125,1689624864.344989,U045WPKCDJ7,5237b29c-b9cf-492c-5ac8-89055db8040d
+126,1689624863.856319,U045WPKCDJ7,"I'm not sure if we can have it up on the same subscription, but we can try this api"
+129,1689620962.169069,U045WPKCDJ7,"If possible, yes"
+131,1689616373.898919,U045WPKCDJ7,And I think the powers that be are much more in favor of GA4 than tools like fathom
+132,1689616184.732549,U045WPKCDJ7,"It's a product analytics platform that we're hoping can combine the best of both worlds, google analytics and platforms like amplitude. We already have it up for Nerd Prime, but we're wanting to see what shopping analytics we can get from it as well"
+133,1689616129.318619,U045WPKCDJ7,"If you have time today, we can go ahead and get this installed asap. It"
+135,1689615762.744989,U045WPKCDJ7,<https://support.pendo.io/hc/en-us/articles/360046272771-Developer-s-guide-to-installing-Pendo>
+136,1689615762.125169,U045WPKCDJ7,The snippet and guide is in this link
+137,1689615750.832479,U045WPKCDJ7,"Would you be able to help me get Pendo set up on our shopping site? It shouldn't be too difficult, and  we can probably use our metadata from customers to add some segmentation"
+138,1689615701.607159,U045WPKCDJ7,"Cool, I'll talk with Jordon"
+141,1689612388.624989,U045WPKCDJ7,Would I be able to get that stripe access as well to look at that data?
+143,1689612248.385619,U045WPKCDJ7,Do you know where we are keeping our transaction data and how we can view it?
+144,1689612234.200709,U045WPKCDJ7,"Sweet, I'll look into it!"
+146,1689611099.317129,U045WPKCDJ7,"Yo, I remember seeing something come up with google analytics. Was that you taking care of it?"
+148,1684251117.676979,U045WPKCDJ7,<https://teams.microsoft.com/l/meetup-join/19%3aLdeYmTnqS-h7WBoZym052cccBcZOffPud9ITUDb14k81%40thread.tacv2/1678204980560?context=%7b%22Tid%22%3a%22745103f4-10b2-4915-8c96-81537b7f075e%22%2c%22Oid%22%3a%225c93ab1e-c50f-416a-8e95-bedef1b1ca65%22%7d|https://teams.microsoft.com/l/meetup-join/19%3aLdeYmTnqS-h7WBoZym052cccBcZOffPud9ITUDb[…]2c%22Oid%22%3a%225c93ab1e-c50f-416a-8e95-bedef1b1ca65%22%7d>
+149,1683583051.594559,U045WPKCDJ7,"That’s the plan! We know Galvan does a really good job of communicating those goals, we’re trying to build prime so it makes good teams like yours better and give teams that struggle a platform to improve."
+152,1683582582.027389,U045WPKCDJ7,"Hey Spencer, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+153,1694013776.935769,U045WPKCDJ7,"Thanks man, I really appreciate it."
+155,1694013718.776669,U045WPKCDJ7,"Hey Christoff, could I get the sandisk 2TB extreme portable ssd that you got for Chris? I'm also working on the stuff he is and am working with large models pretty frequently."
+156,1683562281.621849,U045WPKCDJ7,"Got it, thanks man!"
+158,1683557762.030559,U045WPKCDJ7,"I haven't gotten anything yet, I'll keep you updated"
+160,1683557440.763539,U045WPKCDJ7,Pretty please? :joy:
+162,1683557362.404819,U045WPKCDJ7,"Hey Christof, how can I get access to Nerd's paid Lucid profile?"
+163,1683583207.388569,U045WPKCDJ7,"Hey Aaron, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+164,1683583288.217839,U045WPKCDJ7,"Hey Jeff, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+165,1683642701.227509,U045WPKCDJ7,Thanks man!
+167,1683582414.911349,U045WPKCDJ7,"Hey Braxton, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+168,1683583180.829349,U045WPKCDJ7,"Hey Brant, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+169,1683591010.930339,U045WPKCDJ7,Thanks Adam!
+171,1683582455.538619,U045WPKCDJ7,"Hey Adam, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+172,1683582431.300789,U045WPKCDJ7,"Hey Christian, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+175,1693324875.093069,U045WPKCDJ7,"Sorry to get that to you late, I was assigned last minute to host it"
+178,1693323408.195619,U045WPKCDJ7,To spotlight in nerd alert?
+179,1693323403.144609,U045WPKCDJ7,Are there any new employees today?
+180,1687204610.072519,U045WPKCDJ7,Thanks Deven!
+182,1687199845.052869,U045WPKCDJ7,"You’re awesome, thank you so much!"
+186,1687199673.303389,U045WPKCDJ7,"Hey Deven, happy late Father’s Day! Question for you. Linda Hooper on my team just had to put down her dog on Friday and is pretty sad about it. Is it possible for you/HR to send a bouquet of flowers or something to her house?"
+187,1683559851.510589,U045WPKCDJ7,"Sounds like a wonderful time to remember the good things he did, hopefully it ends up being a happy memory. Enjoy your time with your family!"
+189,1683559496.377179,U045WPKCDJ7,"Thanks Deven, hope everything ends up ok!"
+191,1683145791.110659,U045WPKCDJ7,"No rush, thanks man!"
+193,1683144782.201209,U045WPKCDJ7,"Hey Deven, I don't know if you know the answer to this or not, but on my HSA account, i can see total contributions made, but I can't see what part of the contribution is from me and what part is the matched portion from Nerd. Do you know how I find that info?"
+194,1682455840.435239,U045WPKCDJ7,"Awesome, thanks man!"
+198,1682455063.831209,U045WPKCDJ7,"Also, will this list include any internships that will be opening up?"
+199,1682455054.030769,U045WPKCDJ7,Hey Deven! I'm looking for the link of that list for those open roles at Nerd you talked about today on the Nerd Alert. Where can I find those?
+201,1695138090.555809,U045WPKCDJ7,"I have all of my LinkedIn and iMessage receipts if you want to validate any of the referrals. I blasted it out to a lot of people, but the vast majority of the referrals are actually technical personnel."
+203,1690398856.377909,U045WPKCDJ7,"Yo, I'm just following up on this :arrow_up:  Do you know how I get into google analytics for the ecom site?"
+204,1689868028.061099,U045WPKCDJ7,"Hey Jared, do you have credentials to log into google analytics?"
+206,1687469742.123699,U045WPKCDJ7,"Question: Of all the people you have lined up who want to buy over $3000 worth of nodes, how many of them do not have Ethereum ready to purchase those nodes?"
+207,1682020286.611809,U045WPKCDJ7,Nerd!011235
+210,1684947624.338019,U045WPKCDJ7,"Yo, you still good to meet today?"
+212,1681916353.122359,U045WPKCDJ7,Sure thing! I can meet now or anytime after 11
+216,1684360638.929979,U045WPKCDJ7,"I have some stuff I can send you, but I am currently out helping a church activity"
+217,1684360616.221019,U045WPKCDJ7,Good questions! We have some dashboards that show some basic user data points. What kind of questions are you thinking about?
+222,1684169512.508389,U045WPKCDJ7,Lauren Livingston
+225,1684161788.209999,U045WPKCDJ7,This is really great! I'll work today on getting this built out in Pendo
+229,1683556846.495769,U045WPKCDJ7,"Awesome, let's sync up today! Are you going to be in the office?"
+233,1683317304.824479,U045WPKCDJ7,Sure! Are you free right now?
+235,1682613092.790829,U045WPKCDJ7,"Prime Feedback
+• It's hard to remember to give out tokens every day. I'm tempted to build a script to do it for me.
+    ◦ This is fair, but you don't have to give rewards everyday. We have automated Slack notifications that remind you to give rewards if you go several days without giving a reward. Giving rewards everyday only benefits you by increasing your user point score (top right of screen), which currently are not actionable or spendable.
+• Can tokens accumulate until I give them out?
+    ◦ The ONLY team that has a fixed number of rewards to give is the Nerd United team. All other teams, including your chain team, are slice-of-pie instead of allotment projects, which means you can give as many rewards as you want at any time. For the Nerd United team, rewards-to-give do not accumulate.
+• Sometimes it's hard to think of what to say in the rewards, and I wish there was a way to make that easier. It's not for lack of reasons to give--but from not wanting to give introverted, one-word awards.
+    ◦ This is great feedback, and we're looking for ways to either connect rewards to events (valuable slack messages, jira tickets, etc), or AI-assisted reward message creation.
+• Is the goal to _only_ give them out to exceptional people, even if you only give out one reward a day, or is the goal to find *three people every day* who deserve them the most?
+    ◦ The goal is to give them to whomever you feel deserves a reward. As I said above, you can give as many rewards as you want in any project other than the Nerd United project. Therefore, it doesn't matter if you give 1 reward or 50 rewards a day as long as you feel you have something meaningful to say.
+• It takes _so_ long to save up 50 points, can we make 30 the threshold?
+    ◦ I agree with you, I only just got to 50 points in the Nerd United project. This is definitely something we'll consider.
+• Sometimes I’m more interested in giving tokens to whichever top-ten person I want to stay on the leaderboard, or whoever is closest to earning the 50 points needed to cash out, since anything else feels like throwing pennies in a well.
+    ◦ This is tied to the issue of what is the inherent value behind rewards, and we just hired a gamification specialist to solve this problem!
+• I liked the addition of the “top awards” because it encouraged me to be more creative with my compliments to people
+    ◦ Love this, I hope we can find more ways to incentivize this kind of behavior
+• The battle for the top spot on the leaderboard is hard to topple if it doesn’t reset every so often. If the leaderboard doesn't reset, then I just end up throwing tokens at whoever piques my interest on the leaderboard, instead of who actually deserved it that day.
+    ◦ We are building out leaderboard with growth metrics that show who is growing the most instead of total points/rewards, but that's definitely a good idea to build reward functionality to topple leaderboard toppers
+• In the slice-of-pie projects, there is no way for me to see my giving progress for a given month. If this is a determining factor in peoples bonus, I don't feel equipped. What if I only give out one reward a week and end up forgetting all the other awesome things other people did? How do I keep track of my giving so I can make sure it's balanced?
+    ◦ The idea is that if something is valuable enough, Prime users will take the minute it takes to give a reward to that person. However, if the platform doesn't make that transaction valuable or easy enough, that's definitely something we need to solve.
+"
+236,1682613091.787989,U045WPKCDJ7,"These are my responses to this person, in case this answers some of your questions as well."
+237,1682612733.702499,U045WPKCDJ7,"I'm a little confused by the prime survey questions, but here is some feedback I've been chewing on~~
+
+Prime Feedback
+• It's hard to remember to give out tokens every day. I'm tempted to build a script to do it for me.
+• Can tokens accumulate until I give them out?
+• Sometimes it's hard to think of what to say in the rewards, and I wish there was a way to make that easier. It's not for lack of reasons to give--but from not wanting to give introverted, one-word awards.
+• Is the goal to _only_ give them out to exceptional people, even if you only give out one reward a day, or is the goal to find *three people every day* who deserve them the most?
+• It takes _so_ long to save up 50 points, can we make 30 the threshold?
+• Sometimes I’m more interested in giving tokens to whichever top-ten person I want to stay on the leaderboard, or whoever is closest to earning the 50 points needed to cash out, since anything else feels like throwing pennies in a well.
+• I liked the addition of the “top awards” because it encouraged me to be more creative with my compliments to people
+• The battle for the top spot on the leaderboard is hard to topple if it doesn’t reset every so often. If the leaderboard doesn't reset, then I just end up throwing tokens at whoever piques my interest on the leaderboard, instead of who actually deserved it that day.
+• In the slice-of-pie projects, there is no way for me to see my giving progress for a given month. If this is a determining factor in peoples bonus, I don't feel equipped. What if I only give out one reward a week and end up forgetting all the other awesome things other people did? How do I keep track of my giving so I can make sure it's balanced?"
+238,1682612732.599849,U045WPKCDJ7,"This is feedback I got from someone who has given a lot of feedback in the past, I think it highlights several issues I've noticed about prime and touches on some stuff I think that can be solved through proper implementation of gamification techniques"
+239,1682364163.290229,U045WPKCDJ7,<https://prime.nerdunited.com/accept/invite/3d6ac4e78c6b4b9f8c6f52a845ddf749>
+241,1682351781.862329,U045WPKCDJ7,Yo Emily! Were you working on some dashboards for the Prime home page? I'm working with our design guy and wanted your input on what that would look like
+243,1683299657.487239,U045WPKCDJ7,Sure!
+245,1686082099.603009,U045WPKCDJ7,"Fantastic, I’ll do that. Thanks!"
+247,1686080389.589689,U045WPKCDJ7,"This is fantastic, thank you! I might reach out to you with other questions as well. One I have now is, do you have any pulse on how this data has changed over the last 4 months or with subsequent changes to your product?"
+251,1686079960.157219,U045WPKCDJ7,"Tyler said you'd be someone good to reach out to and talk to about this, but let me know if there's anyone else I should talk to as well."
+252,1686079932.095289,U045WPKCDJ7,"Hey Sydney, I'm working on product with the Prime team to get our node sales site up and running, and I'd love to know what you've done with node engine to figure out what your team's focus is. Do you guys have a user journey map that I could use to learn what you have already learned about your users?"
+253,1694015935.116099,U045WPKCDJ7,"Great, thanks!"
+255,1694015823.795049,U045WPKCDJ7,"Question for you. I have my Nerd wallet with my Eon, but I don't yet have a crypto wallet to purchase other crypto tokens and currencies. What wallet/app would you recommend using?"
+256,1692909585.143729,U045WPKCDJ7,No problem
+258,1692909565.630109,U045WPKCDJ7,"Yep, I sent you an email responding about those. We've already got those taken care of"
+261,1692654888.821639,U045WPKCDJ7,"I don't know the process to update it, so I'm not sure when it will be done. I'll give you updates as I receive them"
+262,1692654853.646189,U045WPKCDJ7,"Awesome, I'm working on it now"
+264,1692654675.587059,U045WPKCDJ7,"Yes, I'll pass it on to have it looked into, along with any others that need changing"
+267,1692654602.645379,U045WPKCDJ7,You should be able to download the spreadsheet from here and do what you like with it. I have the query saved and can just run it again whenever you need the updated data
+269,1692654547.654269,U045WPKCDJ7,Make changes to the spreadsheet?
+272,1692654070.528359,U045WPKCDJ7,
+274,1692653844.856719,U045WPKCDJ7,This has all people who had a sponsor and bought a node
+277,1692642439.229689,U045WPKCDJ7,"Hey, sorry I missed this. There are a couple data funnels that weren’t updating, I’ll make sure the data team got them up and running and I’ll get you that data"
+280,1692378002.507359,U045WPKCDJ7,
+281,1690923304.204189,U045WPKCDJ7,I love it. I'll check with Cade and see what we need to finish to get that up
+284,1690923106.927239,U045WPKCDJ7,I think Cade. This functionality ties into what we are working on to also get builder/lite nodes assigned when someone pays via wire transfer
+287,1687469730.484249,U045WPKCDJ7,"Question: Of all the people you have lined up who want to buy over $3000 worth of nodes, how many of them do not have Ethereum ready to purchase those nodes?"
+290,1683562502.540619,U045WPKCDJ7,Awesome!
+292,1683562462.718679,U045WPKCDJ7,"Hey Spencer, sorry I missed this, I was in stand up. Sounds like Jake was able to answer your questions, is there anything else that you need?"
+297,1682011821.275419,U045WPKCDJ7,Just sent the results to you again via polly. It will likely come from the Polly bot
+298,1682011420.721019,U045WPKCDJ7,<https://app.polly.ai/survey/dkXcEfbbbuvWQqoPh>
+299,1692819591.386989,U045WPKCDJ7,Thank you!
+301,1692816831.104089,U045WPKCDJ7,"I was just about to send you a message, but I realized I want my nodes on my personal email, so I’m making a new account. It will be <mailto:briton.demars@gmail.com|briton.demars@gmail.com>"
+304,1691000721.016419,U045WPKCDJ7,You coming with Cade and me?
+306,1688138238.199419,U045WPKCDJ7,Did you figure out who has access to <mailto:info@nerdunited.com|info@nerdunited.com>
+307,1687980585.497139,U045WPKCDJ7,Maybe someone in IT knows?
+308,1687980575.593289,U045WPKCDJ7,No idea
+311,1686842988.179039,U045WPKCDJ7,You should talk to Seth and see if there's any survey he wants to push
+312,1686842964.660089,U045WPKCDJ7,Correct!
+314,1682715270.657099,U045WPKCDJ7,Yep!
+317,1682615853.986619,U045WPKCDJ7,And practice your smash with your down time ;)
+318,1682615842.153679,U045WPKCDJ7,Sorry man :/ Pound that vitamin C and get some rest!
+320,1682614617.507149,U045WPKCDJ7,"Sorry you're not feeling well man, that stinks!"
+321,1684940015.001789,U045WPKCDJ7,Hey Brittney! Are you in yet today? I just need to exchange some claw machine prizes
+323,1683582440.795559,U045WPKCDJ7,"Hey Anthony, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+324,1683583243.235759,U045WPKCDJ7,"Hey Sean, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+325,1683582490.198679,U045WPKCDJ7,"Hey Russ, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+327,1692150174.710919,U045WPKCDJ7,"Hey, I won’t be able to make it tonight, thanks for the invite though!"
+329,1687453357.068739,U045WPKCDJ7,Happy Birthday dude! It's a shame the Fox won't be here today
+331,1682628923.190649,U045WPKCDJ7,"I'm in the prime room, where can I find you?"
+332,1682628765.225229,U045WPKCDJ7,Awesome!
+335,1682627720.906679,U045WPKCDJ7,Awesome! Can I find you in 15 min?
+337,1695239049.853579,U045WPKCDJ7,"Yeah, no worries!"
+340,1695232532.371279,U045WPKCDJ7,You in for lunch smash today???? :shifty_eyes:
+341,1694124445.178389,U045WPKCDJ7,"Excellent, come on over"
+343,1694124384.682869,U045WPKCDJ7,You down for smash??
+344,1693950255.089769,U045WPKCDJ7,No worries! I'll head over there
+346,1693948214.379899,U045WPKCDJ7,Sahweet. Let me know when you're free
+348,1693948182.264859,U045WPKCDJ7,I'm in the mood for some smash if you are  :eyes:
+350,1693946503.441539,U045WPKCDJ7,You in the office today?
+351,1692222438.254919,U045WPKCDJ7,"No worries, I gotta head, but we’ll get it another day"
+353,1692220699.727919,U045WPKCDJ7,"Yo, you free for some smash?"
+355,1692051257.845269,U045WPKCDJ7,"No worries, we’ll get it later"
+356,1692051234.504969,U045WPKCDJ7,I had to head out
+359,1692048132.875029,U045WPKCDJ7,Up for some 1v1s in a bit?
+360,1691791234.882489,U045WPKCDJ7,Where you at?
+361,1691787610.089999,U045WPKCDJ7,It’s time
+363,1691782263.708189,U045WPKCDJ7,"yo, you up for some smash?"
+364,1687550655.264179,U045WPKCDJ7,"Perfect, thanks man!"
+366,1687535195.535319,U045WPKCDJ7,"Hey Richard, question for you. We are looking at building in functionality for our node sales launch to enable customers to purchase nodes via wire transfer. What information would we need, banking or otherwise, to enable wire transfers for granting node licenses?"
+367,1694443528.103889,U045WPKCDJ7,Gotcha :+1::skin-tone-2:
+369,1694442707.808669,U045WPKCDJ7,"Yeah, that makes sense. I just thought it was funny, haha. Will you not be coming into the office then?"
+371,1694442441.808339,U045WPKCDJ7,"There really won't be any food brought in this whole week? With the number of people in the office this week, Nerd could pay for breakfast, lunch, and dinner for everyone in the office everyday of the week, haha"
+373,1687446330.086249,U045WPKCDJ7,"Hey Cy, I'm not sure if we have Prime breakfast today, but I think we can put a pause on it for the time being. If we're planning on having it for a survey we've prepared, how early do you need to know in order to get it by Thursday?"
+375,1683212658.901909,U045WPKCDJ7,Is the food en route today?
+376,1682608239.302099,U045WPKCDJ7,You freakin rock
+378,1682608191.429389,U045WPKCDJ7,"Yo, do you know if food is coming today?"
+379,1682004099.244619,U045WPKCDJ7,"These burritos are the best ones you get, thanks man!"
+380,1682003496.871219,U045WPKCDJ7,Do you know what it is today?
+381,1682001867.534329,U045WPKCDJ7,amazing
+383,1682001488.753149,U045WPKCDJ7,Is there prime breakfast today?
+384,1692649986.664099,U045WPKCDJ7,"Holy cow, that is crazy!!"
+386,1692649004.626329,U045WPKCDJ7,"Haha, oh good, I'm glad the storm didn't mess up your plans. No worries, I'll get with you tomorrow!"
+388,1692648227.164579,U045WPKCDJ7,"Also, do you have time for a data request for me really quick?"
+389,1692648212.845859,U045WPKCDJ7,"Hey man, how did the proposal go??"
+390,1692040245.253529,U045WPKCDJ7,"This is awesome! Thanks for sharing this with me, I just was curious of the progress we've made on this."
+392,1692031046.503189,U045WPKCDJ7,Yo Jake! I was talking with Chris and he said that you were helping him with some of the models he is building for Perspect. Can you tell me a little bit more about what you were doing?
+394,1690221560.744109,U045WPKCDJ7,"Yo! Thanks again for your help today! I have a couple data reports I'd like to build out, and I was thinking it might be good to have these on a refreshing dashboard in the long run. Do you have bandwidth to work on one of these today? No problem at all if you can't do it!"
+395,1690218258.977659,U045WPKCDJ7,You are the man! Thanks for getting that nailed out
+398,1683575157.677019,U045WPKCDJ7,"Just got it from Jordon Cissna, thanks man!"
+401,1683574617.381289,U045WPKCDJ7,"Hey, I just sent in a request to get access to that trello board, is that you who controls its access?"
+402,1683560445.056119,U045WPKCDJ7,Can I come find you in a few minutes to go over the dashboard?
+403,1683560433.881519,U045WPKCDJ7,Thanks man!
+405,1683557130.521589,U045WPKCDJ7,"Yo, can you send me the link to the company trello board with everyone's names and positions?"
+406,1683556774.547299,U045WPKCDJ7,"Thanks man, looks great!"
+409,1683300939.761339,U045WPKCDJ7,So the number of distinct members that have responded over the total number of members in the team. Go ahead and play around with this and other metrics and see which ones tell the best story
+410,1683300901.962429,U045WPKCDJ7,decimal.Round(((decimal)distinctMemberResponseCount / teamMemberCount) * 100
+413,1683212627.870809,U045WPKCDJ7,"But you can hold off on it for now, I'll have an answer in about 30 minutes"
+414,1683212597.389449,U045WPKCDJ7,"It might be a good idea for you to do two different displays for response rate on sentiment analysis. One that shows total number of questions answered divided by total number of questions available (like number of team members X number of questions), and one that shows total number of people that have completed all the questions."
+415,1683212370.961009,U045WPKCDJ7,"Good question, I'm not entirely sure, let me check"
+417,1683141294.612229,U045WPKCDJ7,Thanks man!
+419,1683141069.547929,U045WPKCDJ7,"The average of all scores for a given category, or for all categories when calculating total team score"
+420,1683141052.142339,U045WPKCDJ7,nps stands for net promoter score. We calculate it by taking all of the responses of that category (responses being a number from 1-7) and dividing it by the total quantity of responses for that category.
+422,1683140654.150209,U045WPKCDJ7,Does this make sense to you? It tells what each of the buckets are
+423,1683140645.248619,U045WPKCDJ7,"case when nps &lt; 0 then ‘needs attention’
+     when nps &lt; 40 then ‘poor’
+     when nps &lt; 70 then ‘average’
+     when nps &lt; 101 then ‘good’ end as nps_cat,"
+425,1683126969.746849,U045WPKCDJ7,You’re the man! Let me know if you have any questions or need any help
+427,1683126673.338079,U045WPKCDJ7,Within the next couple of days?
+428,1683126665.956939,U045WPKCDJ7,Do you think you could get these done soonish?
+429,1683126655.008249,U045WPKCDJ7,"I have data ideas for Prime:
+I would like to see Total Points for each Team over time
+I would like to see every Total Points per person over time (one graph with everyone on the team) &amp; (a graph for each person individually)
+I would like a score (basically the avg. slope of someone's graph) - this would essentially tell us their avg. engagement
+I would like a scoreboard of everyone's score
+I want to see a report that shows me negative response % of each question each month.
+I would love to see a graph that shows over time percentage of positive, neutral, and negative sentiment responses
+A leaderboard of all teams sentiment response rate"
+430,1683126650.273419,U045WPKCDJ7,This is from Spencer Montgomery on Prime
+431,1693956092.499209,U045WPKCDJ7,When do you need help?
+433,1686843113.580749,U045WPKCDJ7,Are there any surveys you want to push today?
+436,1686257169.680579,U045WPKCDJ7,Some interesting things to glean from this I found during my research
+437,1686257159.022979,U045WPKCDJ7,<https://www.emerald.com/insight/content/doi/10.1108/ET-03-2019-0060/full/html>
+438,1686253779.278639,U045WPKCDJ7,How many responses were added to the survey from this morning?
+440,1685481812.044559,U045WPKCDJ7,<tel:+1(307)880-4976|+1 (307) 880-4976>
+443,1685481744.373059,U045WPKCDJ7,"Although I will likely be going up at noon, and Hyrum will go up in the morning"
+444,1685481719.063549,U045WPKCDJ7,Yes
+447,1685465524.757169,U045WPKCDJ7,"Sweet, I'll start with that"
+450,1685463095.044219,U045WPKCDJ7,"Sweet, i'll get on it"
+454,1685462230.719509,U045WPKCDJ7,Can you add me to your clickup thing?
+456,1685132660.768349,U045WPKCDJ7,Do we have a room for our 2:30?
+461,1685044852.572309,U045WPKCDJ7,From the polly today. I think this shows some interesting insight when looked at next to our interview results
+462,1685041311.326449,U045WPKCDJ7,Where you at?
+464,1685031981.155239,U045WPKCDJ7,Are we still doing a dry run?
+465,1685030376.087229,U045WPKCDJ7,Could you put this in general or announcements?
+466,1685030368.572059,U045WPKCDJ7,"Morning Nerds! Come to the Prime room to get a fully belly of breakfast sandwich and to get warm fuzzy feelings for answering our survey to help make our product fantastic. You guys rock! Also, here is the survey link for those of you WFH who would still like to help:
+<https://web.polly.ai/tpfx1g>"
+468,1684960510.057519,U045WPKCDJ7,"5 at the latest, most likely"
+472,1684872690.943189,U045WPKCDJ7,"Option 2: We just write it down and have it be something that takes more effort on our end, but it leaves more options for them to think of hard skills"
+474,1684872632.632589,U045WPKCDJ7,Option 1: We can use the data we got from last week's survey to make a big multiple choice of all hard and soft skills they could choose from. Then we can have it be dynamic
+475,1684872597.251359,U045WPKCDJ7,We can't use open text entry questions to fill ranking questions. We have to hard code the selections
+477,1684771454.884919,U045WPKCDJ7,"I did end up getting your notification when you added me to lil cuz, we're good"
+479,1682364720.313089,U045WPKCDJ7,"Excel files in slack suck, it's better if you download it and then open it on the excel app"
+480,1682364704.195549,U045WPKCDJ7,Landon is the main guy
+481,1683582344.346859,U045WPKCDJ7,"Hey Chris, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+482,1685463900.131959,U045WPKCDJ7,"You’re totally good, don’t worry about it!"
+484,1683583233.275399,U045WPKCDJ7,"Hey Kaden, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+485,1694444001.980069,U045WPKCDJ7,"Not at all, I totally agree with everything you said! I can also do better at talking directly to Demitri to not just play telephone with you, that's my bad. Let me know if there's anything I can do for you!"
+487,1694443834.574379,U045WPKCDJ7,"That's a good point, try and move things along, haha"
+488,1694443826.542629,U045WPKCDJ7,"Cool, I'll make ones that are more ""professional"" for the model prompts"
+492,1694443503.511009,U045WPKCDJ7,"I agree, it will be interesting seeing the dynamics between the teams and leads"
+493,1694443491.499749,U045WPKCDJ7,You're totally good! I'll put it on the back burner until we get something more solid from the product team
+496,1694442502.631189,U045WPKCDJ7,"No worries if you haven't, just looking for what I can do to help"
+497,1694442483.408539,U045WPKCDJ7,"Hey Lauren, has there been any discussion with the product leads of what they want to do for archetypes?"
+498,1694045963.765179,U045WPKCDJ7,"I love it! Thanks for taking that idea and running with it, you’re awesome!"
+500,1694030546.731319,U045WPKCDJ7,No worries!
+502,1694030527.896649,U045WPKCDJ7,Are you able to hop on the meeting now?
+503,1686083869.378769,U045WPKCDJ7,"That would be sweet, thanks! And yes, I'll reach out to Melisa as well"
+506,1686080453.221319,U045WPKCDJ7,"Hey Lauren, I'm working on product with the Prime team to get our node sales site up and running, and I'd love to know what you've done with Galvan to learn about your user's experience in purchasing nodes. Do you guys have a user journey map that I could use to learn what you have already learned about your users? Sydney Freeman said you'd be someone good to reach out to and talk to about this, but let me know if there's anyone else I should talk to as well."
+507,1683582387.675149,U045WPKCDJ7,"Hey Christian, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+508,1683583271.101649,U045WPKCDJ7,"Hey Jason, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+509,1683583195.770319,U045WPKCDJ7,"Hey Mike, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+510,1683583223.500439,U045WPKCDJ7,"Hey Demitri, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+511,1688073848.950889,U045WPKCDJ7,"Hey Christian, we still have your cutting board that's engraved with your last name and the nerd logo! It's in the Prime room for whenever you want to come grab it :simple_smile:"
+512,1683583261.605399,U045WPKCDJ7,"Hey Tasha, Connor McLeod and I are working with Nerd Prime to figure out how to enable your team to communicate more effectively about your business objectives. Can you take 2 minutes to fill out this survey to let us know what your current goals are? <https://www.surveymonkey.com/r/6CTFXXW>"
+513,1693409808.118479,U045WPKCDJ7,it's perfect
+517,1692916491.210439,U045WPKCDJ7,I thought you'd appreciate this
+518,1692916486.935319,U045WPKCDJ7,<https://www.ucc.org/daily-devotional/nerds-for-jesus/>
+521,1690559035.528799,U045WPKCDJ7,"Awesome. The devs are going to work on it ASAP, so if you could update the email text bodies to what you want, that would be great."
+523,1690558684.811579,U045WPKCDJ7,"Also, can you send me the link for that page you showed me that has the actual body text for the email? I'm not seeing it in the documentation link you send me"
+524,1690558051.924989,U045WPKCDJ7,We need an API token. Do you have those?
+525,1690557957.259669,U045WPKCDJ7,"Haha, you and me both. Frankly, I'm impressed you can get anything actionable at all considering how vague things are coming from community"
+527,1690557861.480129,U045WPKCDJ7,"I've got the ticket in, I'll keep you updated on its progress"
+528,1690557848.496329,U045WPKCDJ7,"Awesome, thanks man!"
+530,1690557772.659989,U045WPKCDJ7,I got it
+532,1690557176.063359,U045WPKCDJ7,I'm making a ticket for my devs to make that circle api. Do you have an email template and content you want me to put in for that email?
+533,1690485205.043079,U045WPKCDJ7,"Hahaha, true"
+536,1690484405.379739,U045WPKCDJ7,Although that begs the question: Which is better for the environment? Owning a machine that guzzles gas? Or owning a plant animal that you force to fight other animals for money? :think-about-it:
+537,1690484353.574939,U045WPKCDJ7,Amen
+539,1690483491.331519,U045WPKCDJ7,For you and your love of bulbasaur
+541,1690299033.534759,U045WPKCDJ7,"Oooohh, gotcha, haha"
+542,1690299029.135609,U045WPKCDJ7,What? The incentive to buy a node? :joy:
+545,1690235836.756399,U045WPKCDJ7,There is the html for that and the shown email of it on a local host
+546,1690235827.205879,U045WPKCDJ7,
+547,1690235819.565659,U045WPKCDJ7,
+548,1690235804.199119,U045WPKCDJ7,"```<!DOCTYPE html>&lt;html lang=""en"" xmlns=""<http://www.w3.org/1999/xhtml>"" xmlns:o=""urn:schemas-microsoft-com:office:office""&gt;&lt;head&gt;&lt;meta charset=""UTF-8""&gt;&lt;meta name=""viewport"" content=""width=device-width,initial-scale=1""&gt;&lt;meta name=""x-apple-disable-message-reformatting""&gt;&lt;link href=""<http://fonts.googleapis.com/css?family=Lato:400,700>"" rel=""stylesheet"" type=""text/css""&gt;&lt;title&gt;&lt;/title&gt;&lt;!--[if mso]&gt;&lt;noscript&gt;&lt;xml&gt;&lt;o:officedocumentsettings&gt;&lt;o:pixelsperinch&gt;96&lt;/o:pixelsperinch&gt;&lt;/o:officedocumentsettings&gt;&lt;/xml&gt;&lt;/noscript&gt;&lt;![endif]--&gt;&lt;style&gt;div,h1,p,table,td{font-family:Lato,sans-serif}&lt;/style&gt;&lt;/head&gt;&lt;body style=""margin:0;padding:15px""&gt;&lt;table role=""presentation"" style=""min-width:150px;border-collapse:collapse;border:1px solid #fff;border-spacing:0;text-align:left""&gt;&lt;tr&gt;&lt;td align=""center"" style=""padding:20px 0 15px 0;background:#fff""&gt;&lt;img src=""<https://download.nerdunited.com/email/nerd-logo-dark.png>"" alt="""" width=""300"" style=""height:auto;display:block""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=""padding:18px 15px 21px 15px""&gt;&lt;table role=""presentation"" style=""width:100%;border-collapse:collapse;border:0;border-spacing:0""&gt;&lt;tr&gt;&lt;td style=""padding:0;color:#161616""&gt;&lt;h1 style=""font-size:20px;margin:0 0 10px 0""&gt;&lt;b&gt;Congratulations, your purchase is complete!&lt;/b&gt;&lt;/h1&gt;&lt;p style=""margin:10px 0 0 0;font-size:16px;line-height:24px""&gt;Thank you for making a purchase. Below are details about your order. This is your receipt.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=""padding:0 0 5px 0;color:#161616""&gt;&lt;p style=""font-size:16px;line-height:24px""&gt;You can now go to the dashboard to:&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;tr&gt;&lt;td style=""color:#161616;text-align:left;vertical-align:top;padding:0 0 5px 0""&gt;&lt;img align=""left"" src=""Resources/Icons/Node.svg"" alt="""" width=""25"" style=""height:auto;display:block;padding:0 10px 0 0""&gt;&lt;p align=""left"" style=""margin:0;font-size:16px;line-height:24px;color:#161616""&gt;Download your new nodes&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=""color:#161616;text-align:left;vertical-align:top;padding:10px 0""&gt;&lt;img align=""left"" src=""Resources/Icons/Node.svg"" alt="""" width=""25"" style=""height:auto;display:block;padding:0 10px 0 0""&gt;&lt;p align=""left"" style=""margin:0;font-size:16px;line-height:24px;color:#161616""&gt;Manage your rewards&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=""padding:20px 0 20px 0;vertical-align:center;color:#161616;text-align:left;font-size:24px""&gt;&lt;a href=""<https://nerdunited.com/>"" target=""_blank"" style=""color:#2b716f""&gt;Go To Dashboard&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=""padding:10px 0 10px 0;color:#161616""&gt;&lt;h1 style=""font-size:20px;margin:0""&gt;&lt;b&gt;Below are the details of your order.&lt;/b&gt;&lt;/h1&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;table role=""presentation"" style=""width:100%;border-collapse:collapse;border:none;border-spacing:0""&gt;&lt;tr&gt;&lt;td align=""left"" style=""text-align:left;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#161616""&gt;Order Number:&lt;/p&gt;&lt;/td&gt;&lt;td align=""right"" style=""color:#161616;text-align:right;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#2b716f""&gt;{{Invoice ID}}&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=""left"" style=""text-align:left;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#161616""&gt;Order Date:&lt;/p&gt;&lt;/td&gt;&lt;td align=""right"" style=""color:#161616;text-align:right;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#2b716f""&gt;{{Date}}&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=""left"" style=""text-align:left;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#161616""&gt;Payment Type:&lt;/p&gt;&lt;/td&gt;&lt;td align=""right"" style=""color:#161616;text-align:right;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#2b716f""&gt;{{Type}}&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=""left"" style=""text-align:left;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#161616""&gt;Wallet:&lt;/p&gt;&lt;/td&gt;&lt;td align=""right"" style=""color:#161616;text-align:right;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#2b716f""&gt;{{which wallet}}&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=""left"" style=""text-align:left;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#161616""&gt;Etherscan Link:&lt;/p&gt;&lt;/td&gt;&lt;td align=""right"" style=""color:#161616;text-align:right;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#2b716f""&gt;{{Link}}&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=""left"" style=""color:#161616;text-align:left;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#161616""&gt;Ethereum Blockchain Transaction Hash:&lt;/p&gt;&lt;/td&gt;&lt;td align=""right"" style=""color:#161616;text-align:right;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#2b716f""&gt;{{ETH Tx Hash #}}&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;table role=""presentation"" style=""width:100%;border-collapse:collapse;border:0;border-spacing:0""&gt;&lt;tr&gt;&lt;td align=""left"" style=""text-align:left;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#161616""&gt;Items Purchased:&lt;/p&gt;&lt;/td&gt;&lt;td align=""right"" style=""color:#161616;text-align:right;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:24px;color:#2b716f""&gt;{{Receipt}}&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr style=""border-bottom:1px solid gray""&gt;&lt;td colspan=""100%""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;table role=""presentation"" style=""width:100%;border-collapse:collapse;border:0;border-spacing:0""&gt;&lt;tr&gt;&lt;td align=""left"" style=""text-align:left;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:4px;color:#161616""&gt;Gas Fee:&lt;/p&gt;&lt;/td&gt;&lt;td align=""right"" style=""color:#161616;text-align:right;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:4px;color:#2b716f""&gt;{{price of fee}}&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=""left"" style=""text-align:left;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:8px;color:#161616""&gt;&lt;b&gt;Total:&lt;/b&gt;&lt;/p&gt;&lt;/td&gt;&lt;td align=""right"" style=""color:#161616;text-align:right;vertical-align:top""&gt;&lt;p style=""font-size:16px;line-height:8px;color:#2b716f""&gt;{{totalETH}} ETH : ${{USD}} USD&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=""padding:10px 0;vertical-align:top;color:#161616;line-height:34px;font-size:16px""&gt;Thanks,&lt;br&gt;Nerd United&lt;/td&gt;&lt;/tr&gt;&lt;tr style=""border-bottom:1px solid gray""&gt;&lt;td colspan=""100%""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=""left"" style=""padding:0 0 15px 15px;background:#fff""&gt;&lt;img src=""<https://download.nerdunited.com/email/nerd-icon-dark.png>"" alt="""" width=""55"" style=""height:auto;display:block""&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=""center"" style=""padding:0 0 0 15px;background:#fff;text-align:left;line-height:28px;font-size:16px""&gt;&lt;div style=""display:inline-block;text-align:left""&gt;2000 N Ashton Blvd | Suite 200 | Lehi, UT 84043&lt;br&gt;support@nerdunited.com | <tel:+1(855)637-3287|+1 (855) 637-3287>&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=""center"" style=""padding:25px 0 100px 15px;background:#fff;text-align:left;line-height:28px;font-size:16px""&gt;&lt;div style=""display:inline-block;text-align:left""&gt;You received this email as confirmation of your purchase.&lt;br&gt;Don't want to receive future email communications? &lt;a href=""<https://nerdunited.com/>"" target=""_blank"" style=""color:#2b716f""&gt;Unsubscribe&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;```
+"
+551,1690228244.670009,U045WPKCDJ7,"I don’t know where they are, I’m trying to get them now"
+556,1689614512.907399,U045WPKCDJ7,He actually just got married a bit ago
+557,1689614506.897919,U045WPKCDJ7,"Haha, small world, that's hilarious"
+560,1689613042.604139,U045WPKCDJ7,"Wait, what? hahaha, who is it?"
+562,1689612948.844729,U045WPKCDJ7,Gotcha. What are you up to in Montana?
+565,1689612363.469179,U045WPKCDJ7,"Oh, no worries! I'm also curious about what you have for community in terms of what account they will be creating and the value-add, but I can get with Cameo on it"
+567,1689611227.900889,U045WPKCDJ7,Yo! I heard you and Cameo are wanting to get an api set up to send emails to people who purchase nodes that sends them to community sign up. I was hoping to get some more info on that and what you guys are hoping to get from that process.
+569,1688058479.361239,U045WPKCDJ7,This is what I get
+573,1687278264.744599,U045WPKCDJ7,Say hi to Daniel and Jacqueline for me
+576,1687278229.548999,U045WPKCDJ7,"The one day I can finally make it in, and you're not here to smash"
+579,1686587860.464029,U045WPKCDJ7,probably seth
+580,1686587854.546709,U045WPKCDJ7,"I don't have any of the recordings, only seth or tyler started the recordings"
+586,1686000969.231119,U045WPKCDJ7,"lol, I just saw this, but luckily I didn't go to purgatory for a second, haha"
+594,1685545065.290799,U045WPKCDJ7,No smash at cryptopia? :sadblob:
+595,1685463031.601259,U045WPKCDJ7,"Are you guys still doing the smash tournament at cryptopia/need help with it? Just wondering so I know when to plan to be there, I'm already going to help with the day trading app"
+596,1684950043.575879,U045WPKCDJ7,M
+598,1684854984.314739,U045WPKCDJ7,"Bro, this is wack. These are so smooth, haha"
+606,1684251616.973879,U045WPKCDJ7,Where do I find my unique discord link again?
+608,1682438374.634109,U045WPKCDJ7,<https://http.cat/>

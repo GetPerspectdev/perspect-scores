@@ -372,8 +372,9 @@ class One_Class_To_Rule_Them_All():
             "files_to_analyze_with_llm": files_to_analyze
         })
     
-    def professionalism_score(self, slack_token: str):
-        import slack_sdk
+    def professionalism_score(self, slack_token: str, user_id=None):
+        if user_id == None:
+            import slack_sdk
         import pandas as pd
 
         number_template = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
@@ -396,48 +397,57 @@ class One_Class_To_Rule_Them_All():
         ###Response:
         Your Professionalism rating from 1-100 is """
 
-        client=slack_sdk.WebClient(token=slack_token)
-        dm_channels_response = client.conversations_list(types="im")
-        
-        all_messages = {}
+        if user_id == None:
+            client=slack_sdk.WebClient(token=slack_token)
+            dm_channels_response = client.conversations_list(types="im")
+            
+            all_messages = {}
 
-        for channel in dm_channels_response["channels"]:
-            # Get conversation history
-            history_response = client.conversations_history(channel=channel["id"])
+            for channel in dm_channels_response["channels"]:
+                # Get conversation history
+                history_response = client.conversations_history(channel=channel["id"])
 
-            # Store messages
-            all_messages[channel["id"]] = history_response["messages"]
+                # Store messages
+                all_messages[channel["id"]] = history_response["messages"]
 
-        txts = []
+            txts = []
 
-        for channel_id, messages in all_messages.items():
-            for message in messages:
-                try:
-                    text = message["text"]
-                    user = message["user"]
-                    timestamp = message["ts"]
-                    txts.append([timestamp,user,text])
-                except:
-                    pass
+            for channel_id, messages in all_messages.items():
+                for message in messages:
+                    try:
+                        text = message["text"]
+                        user = message["user"]
+                        timestamp = message["ts"]
+                        txts.append([timestamp,user,text])
+                    except:
+                        pass
 
-        df = pd.DataFrame(txts)
-        df.columns =  ['timestamp','user','text']
-        self_user = df['user'].value_counts().idxmax()
-        df = df[df.user == self_user]
+            df = pd.DataFrame(txts)
+            df.columns =  ['timestamp','user','text']
+            self_user = df['user'].value_counts().idxmax()
+            df = df[df.user == self_user]
+            df.to_csv(f"./scores/user_slack_data/{self_user}_messages.csv")
 
-        messages = df['text'].values.tolist()
+            messages = df['text'].values.tolist()
+        else:
+            files = os.listdir(self.ds_folder)
+            file = [i for i in files if user_id in i]
+            df = pd.read_csv(file)
+            messages = df['text'].values.tolist()
 
-        # embeddings_list = []
-        # for message in messages:
-        #     if len(message)>0:
-        #         embed = self.embedder.embed(message)
-        #         embeddings_list.append(embed)
-        #     else:
-        #         continue
-        # df['embedding'] = embeddings_list
+        embeddings_list = []
+        for message in messages:
+            if len(message)>0:
+                embed = self.embedder.embed(message)
+                embeddings_list.append(embed)
+            else:
+                embed = self.embedder.embed("Likely an emoji")
+                embeddings_list.append(embed)
+        df['embedding'] = embeddings_list
 
         message_history = []
         scores = []
+        i = 1
         for message in messages:
             if self.verbose:
                 print(f"Searching VectorDB for {message[:10]}...")
@@ -476,6 +486,9 @@ class One_Class_To_Rule_Them_All():
             })
             message_history.append(message)
             scores.append(obj)
+            if self.verbose:
+                print(f"Finished Message {i} of {len(messages)}")
+            i += 1
 
         df['scores'] = scores
         df.to_csv(f"./scores/user_slack_data/{self_user}_messages.csv")
