@@ -470,4 +470,4 @@ class One_Class_To_Rule_Them_All():
 
         df['scores'] = scores
         df.to_csv(f"./user_slack_data/{self_user}_messages.csv")
-
+        return df.to_json()
