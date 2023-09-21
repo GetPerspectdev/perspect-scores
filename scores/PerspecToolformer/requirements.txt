@@ -1,9 +1,0 @@
-langchain 
-openai 
-tiktoken 
-duckduckgo-search 
-youtube_search 
-llama-cpp-python
-gradio
-gpt4all
-nest_asyncio
