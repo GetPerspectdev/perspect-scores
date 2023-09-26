@@ -264,6 +264,7 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
         resource_name = max(sorted(resource_names), key=resource_names.count)
     else:
         resource = "No resource"
+        resource_name = "No resource"
 
     if verbose:
         print({
