@@ -213,6 +213,7 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
     scores = []
     patterns = []
     resources = []
+    resource_names = []
     for k, v in files.items():
         scores.append(v['score'])
         patterns.append(v['samples']['Design Pattern'])
@@ -230,6 +231,8 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
                       "llm_out": v['llm_out']
                 }
             )
+            resources.append(v['samples']['Unnamed: 4'])
+            resource_names.append(v['samples']['Design Pattern'])
         else:
             pp.append(
                 {
@@ -257,7 +260,8 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
         top_pattern = occurence.most_common(3)
         bot_pattern = occurence.most_common()[-3:]
     if len(resources) > 0:
-        resource = max(resources, key=resources.count)
+        resource = max(sorted(resources), key=resources.count)
+        resource_name = max(sorted(resource_names), key=resource_names.count)
     else:
         resource = "No resource"
 
@@ -270,6 +274,7 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
         "top_3_patterns": top_pattern,
         "bot_3_patterns": bot_pattern, 
         "resource": resource, 
+        "resource_name": resource_name, 
         "files": np.asarray(pp).tolist()
     })
     return {
