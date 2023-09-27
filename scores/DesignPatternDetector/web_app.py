@@ -205,8 +205,8 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
         files[file] = {'score': score, 'samples': samples, 'content': content, 'llm_out': ''}
         if verbose:
             print(f"Score: {score} {file.split('/')[-1]}")
-        if score <= 1.3 and score >= 1.1:
-            files[file]['llm_out'] = code_chain.run(content)
+        # if score <= 1.3 and score >= 1.1:
+        #     files[file]['llm_out'] = code_chain.run(content)
     num_files = len(file_urls)
 
     pp = []
