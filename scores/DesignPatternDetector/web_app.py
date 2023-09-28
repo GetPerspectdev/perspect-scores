@@ -286,5 +286,6 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
         "top_3_patterns": top_pattern,
         "bot_3_patterns": bot_pattern, 
         "resource": resource, 
+        "resource_name": resource_name,
         "files": np.asarray(pp).tolist()
     }

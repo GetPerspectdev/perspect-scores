@@ -1,11 +1,11 @@
-langchain 
-openai 
-tiktoken 
-duckduckgo-search 
-youtube_search 
+langchain
+openai
+tiktoken
+duckduckgo-search
+youtube_search
 llama-cpp-python
 gradio
-gpt4all
+gpt4all==1.0.12
 nest_asyncio
 slack_sdk
 flask
