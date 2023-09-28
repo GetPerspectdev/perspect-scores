@@ -7,3 +7,7 @@ llama-cpp-python
 gradio
 gpt4all
 nest_asyncio
+slack_sdk
+flask
+psycopg
+psycopg_binary
