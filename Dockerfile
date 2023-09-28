@@ -1,15 +1,17 @@
-FROM --platform=linux/amd64 continuumio/miniconda3
-RUN conda create -n env python=3.11
-RUN echo "source activate env" > ~/.bashrc
-ENV PATH /opt/conda/envs/env/bin:$PATH
+FROM alpine:3.16
 
-ADD environment.yml environment.yml
-RUN conda install conda=23.7.4
-# RUN pip install gpt4all==1.0.12
-RUN conda env create -f environment.yml
-# Pull the environment name out of the environment.yml
-RUN echo "source activate $(head -1 /tmp/environment.yml | cut -d' ' -f2)" > ~/.bashrc
-ENV PATH /opt/conda/envs/$(head -1 /tmp/environment.yml | cut -d' ' -f2)/bin:$PATH
+RUN apk add --no-cache wget
+
+RUN apk add --update py-pip
+
+COPY requirements.txt requirements.txt
+# RUN pip install numpy
+RUN pip install -r requirements.txt
+RUN pip install numpy
+
+COPY . .
+EXPOSE 5051
+CMD ["python3", "scores/test_app.py"]
 
 
 # # Make RUN commands use the new environment:
