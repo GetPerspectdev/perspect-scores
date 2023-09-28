@@ -376,6 +376,8 @@ class One_Class_To_Rule_Them_All():
         if user_id == None:
             import slack_sdk
         import pandas as pd
+        import tiktoken
+        tiktoker = tiktoken.encoding_for_model('gpt-3.5-turbo')
 
         number_template = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
         ###Instruction:
@@ -430,13 +432,14 @@ class One_Class_To_Rule_Them_All():
 
             messages = df['text'].values.tolist()
         else:
-            files = os.listdir(self.ds_folder)
+            files = os.listdir("./scores/user_slack_data/")
             file = [i for i in files if user_id in i]
-            df = pd.read_csv(file)
+            df = pd.read_csv(f"./scores/user_slack_data/{file[0]}")
             messages = df['text'].values.tolist()
 
         embeddings_list = []
         for message in messages:
+            message = str(message)
             if len(message)>0:
                 embed = self.embedder.embed(message)
                 embeddings_list.append(embed)
@@ -449,9 +452,13 @@ class One_Class_To_Rule_Them_All():
         scores = []
         i = 1
         for message in messages:
+            message = str(message)
             if self.verbose:
                 print(f"Searching VectorDB for {message[:10]}...")
-            db_query = self.embedder.embed(message)
+            if len(message)>0:
+                db_query = self.embedder.embed(message)
+            else:
+                db_query = self.embedder.embed("Emoji")
             db_query = np.array(db_query, dtype=np.float32)
             _, context_list = self.vectorDB.get_nearest_examples("embedding", db_query, k=3)
 
@@ -464,8 +471,8 @@ class One_Class_To_Rule_Them_All():
                 context_list['comment']
                 ):
                 score_string += f"Example: {similar_message}, Rating: {rating}, Reasoning: {comment}\n"
-            if self.verbose:
-                print(f"Similar Messages from DB: {score_string}")
+            # if self.verbose:
+            #     print(f"Similar Messages from DB: {score_string}")
             
             formatted_prompt_template = PromptTemplate(
                 input_variables=['examples', 'message_history', 'current_message'],
@@ -478,7 +485,14 @@ class One_Class_To_Rule_Them_All():
             dumb_message = "No Message History"
             if len(message_history) == 1:
                 dumb_message = message_history[0]
-
+            
+            num_tokens = len(tiktoker.encode(f"{score_string},\n" + ",\n".join(message_history) + message))
+            while num_tokens > 3800:
+                message_history.pop(0)
+                num_tokens = len(tiktoker.encode(f"{score_string},\n" + ",\n".join(message_history) + message))
+            
+            if self.verbose:
+                print(f"Message token count: {num_tokens}")
             obj = chain.run({
                 "examples": score_string,
                 "message_history": ",\n".join(message_history) if len(message_history) > 1 else dumb_message,
@@ -491,5 +505,5 @@ class One_Class_To_Rule_Them_All():
             i += 1
 
         df['scores'] = scores
-        df.to_csv(f"./scores/user_slack_data/{self_user}_messages.csv")
+        df.to_csv(f"./scores/user_slack_data/{user_id if user_id else self_user}_messages.csv")
         return df.to_json()
