@@ -9,6 +9,7 @@ from collections import Counter
 
 from urllib.parse import urljoin
 import os
+from shutil import rmtree
 import json
 import requests
 
@@ -50,6 +51,18 @@ class One_Class_To_Rule_Them_All():
         q = np.array(embedding, dtype=np.float32)
         _, samples = self.vectorDB.get_nearest_examples("embedding", q, k=knn)
         return [samples]
+    
+    def _get_git(self, user_token: str):
+        from github import Github, Auth
+
+        auth = Auth.Token(user_token)
+        g = Github(auth=auth)
+
+        repos = []
+        for repo in g.get_user().get_repos():
+            repos.append([f"https://{user_token}@github.com/{repo.full_name}.git", f"{'private' if repo.private else 'public'}"])
+            # print(dir(repo))
+        return repos
 
     def archetype_score(self, user_token: str, repo_name: str):
         from github import Github, Auth
@@ -142,8 +155,8 @@ class One_Class_To_Rule_Them_All():
 
         obj = json.dumps({"archetype": archetype})
         return obj
-    
-    def designpatterns_score(self, repo_url: str, branch="main"):
+
+    def designpatterns_local_score(self, repo_url: str = ""):
         CODE_FILES = [
             '.cgi',
             '.cmd',
@@ -159,150 +172,36 @@ class One_Class_To_Rule_Them_All():
             '.ipynb',
             '.sh',
             '.swift',
+            '.ts',
+            '.js'
             ]
-
-        url_tree = [repo_url]
-        file_urls = []
-        contents = []
-        for i in url_tree:
-            r = requests.get(i)
-            if r.status_code == 200:
-                if self.verbose:
-                    print(f"Creating url tree: {i}")
-                soup = BeautifulSoup(r.content, 'html.parser')
-                if len(soup.find_all('a')) > 0:
-                    for j in soup.find_all('a'):
-                            try:
-                                if f"tree/{branch}" in j.get('href'):
-                                    url = urljoin(i, j.get('href'))
-                                    if url not in url_tree:
-                                        url_tree.append(url)
-                            except TypeError:
-                                if self.verbose:
-                                    print(f"Error on original repo")
-                else:
-                    stuff = json.loads(str(soup))
-                    try:
-                        for j in stuff['payload']['tree']['items']:
-                            try:
-                                if f"{i.split('/')[-1]}" in j['path'] and len(j['path'].split(".")) == 1:
-                                    url = f"{i}/{j['name']}"
-                                    if url not in url_tree:
-                                            url_tree.append(url)
-                            except TypeError:
-                                if self.verbose:
-                                    print(f"Error on {j}")
-                    except KeyError:
-                            if self.verbose:
-                                print(f"Error on {i}")
-            else:
-                print(f"Problem with {repo_url}")
-        for tree_url in url_tree:
-            if self.verbose:
-                    print(f"Tree: {tree_url}")
-            r = requests.get(tree_url)
-            soup = BeautifulSoup(r.content, 'html.parser')
-            if len(soup.find_all('a')) > 0:
-                for i in soup.find_all('a'):
-                    try:
-                        if f"blob/{branch}" in i.get('href'):
-                            url = urljoin(repo_url, i.get('href'))
-                            if url not in file_urls:
-                                file_urls.append(url)
-                                if self.verbose:
-                                    print(f"File: {url.split('/')[-1]}")
-                    except TypeError:
-                        if self.verbose:
-                            print(f"Error on {i}")
-            else:
-                stuff = json.loads(str(soup))
-                try:
-                    for j in stuff['payload']['tree']['items']:
-                        try:
-                            if j['contentType'] == 'file':
-                                url = f"{tree_url}/{j['name']}"
-                                if url not in file_urls:
-                                        file_urls.append(url)
-                                        if self.verbose:
-                                            print(f"File: {url.split('/')[-1]}")
-                        except TypeError:
-                            if self.verbose:
-                                print(f"Error on {j}")
-                except KeyError:
-                    if self.verbose:
-                        print(f"Error on {i}")
-
-        for url in file_urls:
-            if url != repo_url:
-                url = url.replace ("tree/", "")
-            url = (
-                url
-                .replace("github.com", "raw.githubusercontent.com")
-                .replace(" ", "%20")
-                .replace("blob/", "")
-            )
-
-            if any(ext in url for ext in CODE_FILES) or url.endswith('.ts') or url.endswith('.js'):
-                try:
-                    r = requests.get(url)
-                    if self.verbose:
-                        print(f"Content: {url}\nStatus: {r.status_code}")
-                    if r.status_code == 200:
-                        file_content = BeautifulSoup(r.content, 'html.parser')
-                        contents.append(file_content)
-                    else:
-                        contents.append('')
-                except:
-                    pass
-            else:
-                contents.append('')
-                continue
-
-            
-        
+        os.system(f"git clone {repo_url[0]} curr_repo")
+        contents = [f for f in os.listdir("./curr_repo/") if os.path.isfile(f)]
         files = {}
-        # code_template = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
-        #         ###Instruction:
-        #         You are an expert programming assistant who will tell the truth, even if the truth is that they don't know.
-        #         Given some code, you must determine if it is close to a particular design pattern in that programming language, and if so, how they can refactor that code into code that follows a design pattern.
-        #         If the code does not match a design pattern, you should give a recommendation as to which design pattern should be used in this instance.
-
-        #         ###Input:
-        #         {code}
-
-        #         ###Response:
-        #         The closest design pattern to this code is"""
-        # code_prompt_template = PromptTemplate(input_variables=['code'], template=code_template)
-        # code_chain = LLMChain(llm=self.llm, prompt=code_prompt_template)
-
-        files_to_analyze = []
-
-        for file, content in zip(file_urls, contents):
-            if content == '':
-                continue
-            embed = self.embedder.embed(content)
-            query = np.array(embed, dtype=np.float32)
-            score, samples = self.vectorDB.get_nearest_examples('embedding', query, k=1)
-            files[file] = {
-                'score': score, 
-                'samples': samples, 
-                'content': content, 
-                'llm_out': ''
-                }
-            if self.verbose:
-                print(f"Score: {score} {file.split('/')[-1]}")
-            if score <= 1.3 and score >= 1.1:
-                files_to_analyze.append(f"{file}, {content}")
-                #files[file]['llm_out'] = code_chain.run(content)
-        num_files = len(file_urls)
+        for file in contents:
+            with open(file, 'r') as f:
+                content = f.read()
+                embed = self.embedder.embed(content)
+                query = np.array(embed, dtype=np.float32)
+                score, samples = self.vectorDB.get_nearest_examples('embedding', query, k=1)
+                files[file] = {
+                    'score': score, 
+                    'samples': samples, 
+                    'content': content, 
+                    }
 
         pp = []
         scores = []
         patterns = []
         resources = []
+        avgs = {}
         for k, v in files.items():
             scores.append(v['score'])
             patterns.append(v['samples']['Design Pattern'])
+            if v['samples']['Design Pattern'][0] not in avgs:
+                avgs[v['samples']['Design Pattern'][0]] = [v['score']]
+            else:
+                avgs[v['samples']['Design Pattern'][0]] += [v['score']]
             # try: 
             #     pp.append(f"Name: {k.split('/')[-1]} | Score: {v['score']} | Closest: {v['samples']['Language']} {v['samples']['Design Pattern']} | Model: {v['model_out']} |")
             # except KeyError:
@@ -311,10 +210,9 @@ class One_Class_To_Rule_Them_All():
                     {
                         "name": k.split('/')[-1], 
                         "score": float(v['score']), 
-                        "language": v['samples']['Language'], 
-                        "pattern": v['samples']['Design Pattern'],
-                        "resource": v['samples']['Unnamed: 4'],
-                        "llm_out": v['llm_out']
+                        "language": v['samples']['Language'][0], 
+                        "pattern": v['samples']['Design Pattern'][0],
+                        "resource": v['samples']['Unnamed: 4'][0],
                     }
                 )
             else:
@@ -322,13 +220,11 @@ class One_Class_To_Rule_Them_All():
                     {
                         "name": k.split('/')[-1], 
                         "score": float(v['score']), 
-                        "language": v['samples']['Language'], 
-                        "pattern": v['samples']['Design Pattern'],
-                        "llm_out": v['llm_out']
+                        "language": v['samples']['Language'][0], 
+                        "pattern": v['samples']['Design Pattern'][0],
                     }
                 )
 
-            
         if self.verbose:
             print("Getting Average Score and Highest Pattern Likelihood")
         score = float(0)
@@ -347,29 +243,33 @@ class One_Class_To_Rule_Them_All():
             resource = max(resources, key=resources.count)
         else:
             resource = "No resource"
+        for key in avgs.keys():
+            avgs[key] = float(sum(avgs[key])/len(avgs[key]))
+        
+        rmtree("./curr_repo", ignore_errors=True)
 
         if self.verbose:
             print({
-            "design_pattern": eval, 
+            "design_pattern": bool(eval), 
             "repo_url": repo_url, 
-            "num_files": num_files, 
             "overall_score": str(score), 
             "top_3_patterns": top_pattern,
             "bot_3_patterns": bot_pattern, 
             "resource": resource, 
             "files": np.asarray(pp).tolist(),
-            "files_to_analyze_with_llm": files_to_analyze
+            "occurance": dict(occurence),
+            "averages": avgs,
         })
         return json.dumps({
-            "design_pattern": eval, 
+            "design_pattern": bool(eval), 
             "repo_url": repo_url, 
-            "num_files": num_files, 
             "overall_score": str(score), 
             "top_3_patterns": top_pattern,
             "bot_3_patterns": bot_pattern, 
             "resource": resource, 
             "files": np.asarray(pp).tolist(),
-            "files_to_analyze_with_llm": files_to_analyze
+            "occurance": dict(occurence),
+            "averages": avgs,
         })
     
     def professionalism_score(self, slack_token: str, user_id=None):
@@ -507,3 +407,6 @@ class One_Class_To_Rule_Them_All():
         df['scores'] = scores
         df.to_csv(f"./scores/user_slack_data/{user_id if user_id else self_user}_messages.csv")
         return df.to_json()
+    
+    def process_scores(self, user_id: str = ""):
+        pass
