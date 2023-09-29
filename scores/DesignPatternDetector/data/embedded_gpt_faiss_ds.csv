@@ -26797,7 +26797,7 @@ const vehicleFactory = {
 
 const car = vehicleFactory.createVehicle(""car"") // Car { turnOn: [Function: turnOn], name: 'Car', wheels: 4 }
 const truck = vehicleFactory.createVehicle(""truck"") // Truck { turnOn: [Function: turnOn], name: 'Truck', wheels: 8 }
-const motorcycle = vehicleFactory.createVehicle(""motorcycle"") // Motorcycle { turnOn: [Function: turnOn], name: 'Motorcycle', wheels: 2 }",Abstract Factory,JavaScript,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[-7.99117312e-02  7.66007155e-02  3.72527018e-02  5.49991801e-02
+const motorcycle = vehicleFactory.createVehicle(""motorcycle"") // Motorcycle { turnOn: [Function: turnOn], name: 'Motorcycle', wheels: 2 }",JavaScript,Abstract Factory,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[-7.99117312e-02  7.66007155e-02  3.72527018e-02  5.49991801e-02
  -1.14015294e-02  4.02541719e-02  6.47258312e-02  1.28262127e-02
  -1.16574001e-02 -8.51444080e-02  1.96245313e-02 -3.96899953e-02
  -5.15162870e-02  5.85301258e-02  8.83787274e-02  6.87361732e-02
@@ -26918,7 +26918,7 @@ addFlyingAbility(bug1)
 bug1.fly() // output: ""Now Buggy McFly can fly!""
 
 addSpeechAbility(bug2)
-bug2.saySmthg() // output: ""Martiniano Buggland walks the walk and talks the talk!""",Builder,JavaScript,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[-6.72444105e-02  2.79980656e-02  6.31483123e-02  1.19633503e-01
+bug2.saySmthg() // output: ""Martiniano Buggland walks the walk and talks the talk!""",JavaScript,Builder,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[-6.72444105e-02  2.79980656e-02  6.31483123e-02  1.19633503e-01
  -1.66608542e-02 -1.98393501e-02  8.99900049e-02  1.42896883e-02
  -5.04594333e-02  3.65154371e-02 -2.17867717e-02 -5.15718237e-02
  -8.24580491e-02 -1.22862309e-02  6.30554482e-02  9.18014199e-02
@@ -27034,7 +27034,7 @@ console.log(Object.getPrototypeOf(bug1)) // { attack: [Function: attack], flyAwa
 
 console.log(bug1.phrase) // Your debugger doesn't work with me!
 console.log(bug1.attack()) // Pim Pam Pum!
-console.log(bug1.flyAway()) // Flyyyy like an eagle!",Prototype,JavaScript,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[-7.21942857e-02  9.06683132e-03  4.97617722e-02  5.38728014e-02
+console.log(bug1.flyAway()) // Flyyyy like an eagle!",JavaScript,Prototype,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[-7.21942857e-02  9.06683132e-03  4.97617722e-02  5.38728014e-02
   3.01862787e-02 -2.41955165e-02  9.64184701e-02  4.91378456e-02
  -2.06862986e-02  3.59402820e-02 -1.01737091e-02 -3.50693353e-02
  -7.34165385e-02  1.25173386e-03  4.94558811e-02  5.47283292e-02
@@ -27157,7 +27157,7 @@ const MostHabitantsInMillions = () => {
     return Math.max(...citiesHabitantsInMillions.map(city => city.habitants))
 }
 
-console.log(MostHabitantsInMillions()) // 8.9",Adapter,JavaScript,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[ 1.14556417e-01  1.30903833e-02  4.66520451e-02 -4.92276363e-02
+console.log(MostHabitantsInMillions()) // 8.9",JavaScript,Adapter,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[ 1.14556417e-01  1.30903833e-02  4.66520451e-02 -4.92276363e-02
  -2.68954728e-02  2.61119823e-03 -5.98601159e-03 -3.56966542e-04
  -6.05496019e-02  2.98231337e-02 -4.88126278e-02 -8.44845623e-02
  -5.99575937e-02  5.78348450e-02  2.97316071e-02  6.27269596e-03
@@ -27312,7 +27312,7 @@ export default function BasicTable() {
       </Table>
     </TableContainer>
   );
-}",Façade,JavaScript,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[-7.01234071e-03  3.91011052e-02 -4.74563520e-03  5.35942875e-02
+}",JavaScript,Façade,freeCodeCamp,https://www.freecodecamp.org/news/javascript-design-patterns-explained/,"[-7.01234071e-03  3.91011052e-02 -4.74563520e-03  5.35942875e-02
  -2.16839425e-02  1.20050527e-01  9.00461059e-03  5.62083423e-02
   8.64734966e-03  3.26531380e-02  1.13100773e-02 -5.46030179e-02
  -1.65813789e-02 -5.17557897e-02  2.19265372e-03 -4.33062464e-02
@@ -27438,7 +27438,7 @@ var configObject = singleton.getConfig({ ""size"": 8 });
 console.log(configObject);
 var configObject1 = singleton.getConfig({ ""number"": 8 });
 // prints number: 5, size: 8, randomNumber: same randomDecimalValue as in first config
-console.log(configObject1);",Singleton,JavaScript,Toptal,https://www.toptal.com/javascript/comprehensive-guide-javascript-design-patterns,"[-4.77573536e-02  1.28724705e-02 -2.82189883e-02  6.01639673e-02
+console.log(configObject1);",JavaScript,Singleton,Toptal,https://www.toptal.com/javascript/comprehensive-guide-javascript-design-patterns,"[-4.77573536e-02  1.28724705e-02 -2.82189883e-02  6.01639673e-02
  -4.80243471e-03 -1.45680727e-02  7.69927204e-02 -1.64823476e-02
   2.77138017e-02 -4.08953018e-02  1.28751025e-02  2.13957541e-02
  -2.92347539e-02 -2.10971870e-02  5.54168820e-02 -2.70188302e-02
@@ -27603,7 +27603,7 @@ publisherSubscriber.unsubscribe(""mouseClicked"", subscriptionID3);
 
 // there are 2 console.logs executed
 publisherSubscriber.publish(""mouseClicked"", {""data"": ""data1""});
-publisherSubscriber.publish(""mouseHovered"", {""data"": ""data2""});",Observer,JavaScript,Toptal,https://www.toptal.com/javascript/comprehensive-guide-javascript-design-patterns,"[-2.26875208e-02  1.64812140e-03  4.98635806e-02  5.43934144e-02
+publisherSubscriber.publish(""mouseHovered"", {""data"": ""data2""});",JavaScript,Observer,Toptal,https://www.toptal.com/javascript/comprehensive-guide-javascript-design-patterns,"[-2.26875208e-02  1.64812140e-03  4.98635806e-02  5.43934144e-02
   2.61313561e-02 -6.96033165e-02  5.18685393e-02 -5.94865754e-02
   9.13102478e-02 -3.34760733e-02 -3.22494432e-02  3.65899727e-02
  -2.48957667e-02  6.04020781e-04  3.27812210e-02  1.79958660e-02
@@ -27724,7 +27724,7 @@ var manager = {
 // prints 8
 console.log(manager.execute(""add"", 3, 5));
 // prints 2
-console.log(manager.execute(""subtract"", 5, 3));",Command,JavaScript,Toptal,https://www.toptal.com/javascript/comprehensive-guide-javascript-design-patterns,"[-8.01616758e-02  7.80733116e-03 -2.51878356e-03  2.44715177e-02
+console.log(manager.execute(""subtract"", 5, 3));",JavaScript,Command,Toptal,https://www.toptal.com/javascript/comprehensive-guide-javascript-design-patterns,"[-8.01616758e-02  7.80733116e-03 -2.51878356e-03  2.44715177e-02
  -7.32970014e-02 -9.15934369e-02 -1.96126960e-02  6.18556365e-02
   4.22243997e-02 -8.92235246e-03 -7.03328755e-04 -3.58565077e-02
  -4.22653817e-02  1.05282513e-03  7.66926035e-02  3.43149155e-02
@@ -27873,7 +27873,7 @@ function run() {
     for (var i = 0, len = employees.length; i < len; i++) {
         employees[i].say();
     }
-}",Factory Method,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/factory-method,"[-4.48986031e-02  1.05341308e-01  5.31996973e-02  4.23383638e-02
+}",JavaScript,Factory Method,dofactory,https://www.dofactory.com/javascript/design-patterns/factory-method,"[-4.48986031e-02  1.05341308e-01  5.31996973e-02  4.23383638e-02
  -4.18200996e-03 -1.59343367e-03  3.16893309e-02  2.20057424e-02
   4.31386121e-02 -5.51703647e-02 -2.58470129e-04 -4.22399938e-02
  -5.82114421e-02 -1.25534339e-02  3.56248543e-02  7.72854779e-03
@@ -28021,7 +28021,7 @@ function run() {
     mouse.click();
     mouse.move();
     mouse.wheel();
-}",Bridge,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/bridge,"[-4.49530520e-02 -9.53543410e-02  1.95135083e-02 -3.71193737e-02
+}",JavaScript,Bridge,dofactory,https://www.dofactory.com/javascript/design-patterns/bridge,"[-4.49530520e-02 -9.53543410e-02  1.95135083e-02 -3.71193737e-02
   1.11619346e-02 -4.07636631e-04  6.75269812e-02  2.68852711e-02
   5.95268905e-02 -8.49414766e-02  5.10333180e-02  5.50559815e-03
  -1.13899678e-01  6.14112429e-02 -3.88790257e-02  2.95717898e-03
@@ -28177,7 +28177,7 @@ function run() {
     right.add(rightright);
 
     traverse(1, tree);
-}",Composite,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/composite,"[-5.70504069e-02  6.03923900e-03  4.65821773e-02  9.26057529e-03
+}",JavaScript,Composite,dofactory,https://www.dofactory.com/javascript/design-patterns/composite,"[-5.70504069e-02  6.03923900e-03  4.65821773e-02  9.26057529e-03
  -4.58083376e-02 -6.58586174e-02 -3.53222080e-02  6.08781679e-03
   3.44018973e-02  1.01814335e-02  1.29377367e-02  1.89194102e-02
  -7.04132952e-03 -2.07595825e-02  2.57993732e-02  8.52972120e-02
@@ -28301,7 +28301,7 @@ function run() {
 
     var decorated = new DecoratedUser(user, ""Broadway"", ""New York"");
     decorated.say();
-}",Decorator,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/decorator,"[-1.03620449e-02  4.62541096e-02  4.43897285e-02  1.32687725e-02
+}",JavaScript,Decorator,dofactory,https://www.dofactory.com/javascript/design-patterns/decorator,"[-1.03620449e-02  4.62541096e-02  4.43897285e-02  1.32687725e-02
  -8.88741985e-02 -3.81624177e-02  1.11106426e-01 -5.14567234e-02
  -3.14707719e-02 -1.13476925e-01 -1.23512084e-02 -2.31080279e-02
  -5.88549227e-02  5.11875842e-03  8.17481354e-02  4.67188023e-02
@@ -28469,7 +28469,7 @@ function run() {
 
     console.log(""Computers: "" + computers.getCount());
     console.log(""Flyweights: "" + FlyWeightFactory.getCount());
-}",Flyweight,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/flyweight,"[ 6.23190962e-03  3.22861187e-02 -4.64824475e-02  6.87673837e-02
+}",JavaScript,Flyweight,dofactory,https://www.dofactory.com/javascript/design-patterns/flyweight,"[ 6.23190962e-03  3.22861187e-02 -4.64824475e-02  6.87673837e-02
  -3.59363258e-02  2.77953390e-02  5.72690554e-02  2.06127968e-02
  -2.82507744e-02 -4.60418463e-02  7.98536018e-02 -6.85823709e-02
   3.79081704e-02 -6.52826205e-02 -4.73618880e-02  1.43263582e-02
@@ -28623,7 +28623,7 @@ function run() {
 
     console.log(""\nCache size: "" + geo.getCount());
     
-}",Proxy,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/proxy,"[ 2.34028585e-02  1.86241586e-02 -5.35636442e-03 -3.90593074e-02
+}",JavaScript,Proxy,dofactory,https://www.dofactory.com/javascript/design-patterns/proxy,"[ 2.34028585e-02  1.86241586e-02 -5.35636442e-03 -3.90593074e-02
  -7.69924894e-02 -6.87295198e-02  2.39998344e-02 -1.81926433e-02
  -6.23345328e-03 -5.36845252e-02 -3.24970186e-02 -4.89312001e-02
  -1.35832140e-02 -3.79306115e-02 -1.34489993e-02 -1.26871383e-02
@@ -28736,7 +28736,7 @@ function run() {
     var request = new Request(378);
 
     request.get(100).get(50).get(20).get(10).get(5).get(1);
-}",Chain of Responsibility,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/chain-of-responsibility,"[-8.44256133e-02  6.28724471e-02  2.05546878e-02  2.51056999e-02
+}",JavaScript,Chain of Responsibility,dofactory,https://www.dofactory.com/javascript/design-patterns/chain-of-responsibility,"[-8.44256133e-02  6.28724471e-02  2.05546878e-02  2.51056999e-02
  -1.12696484e-01 -4.77334373e-02  2.99536530e-02  3.97429802e-02
   1.11808307e-01 -2.91169696e-02 -5.28538674e-02 -1.44747477e-02
  -4.96956781e-02 -3.51810828e-03  6.25089407e-02 -1.43025154e-02
@@ -28891,7 +28891,7 @@ function run() {
     }
 
     console.log(roman + "" = "" + context.output);
-}",Interpreter,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/interpreter,"[ 4.12199907e-02  7.12031573e-02  4.15827818e-02 -2.47681048e-03
+}",JavaScript,Interpreter,dofactory,https://www.dofactory.com/javascript/design-patterns/interpreter,"[ 4.12199907e-02  7.12031573e-02  4.15827818e-02 -2.47681048e-03
  -1.28157604e-02 -3.42801549e-02  2.39408240e-02  4.11778092e-02
   3.51282544e-02 -3.94072942e-02 -3.43614332e-02 -7.62608424e-02
  -7.20192865e-03 -3.87637615e-02 -1.63658876e-02 -5.79043524e-03
@@ -29030,7 +29030,7 @@ function run() {
     iter.each(function (item) {
         console.log(item);
     });
-}",Iterator,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/iterator,"[-1.58095974e-02  5.45584643e-03  2.44846866e-02  1.55830216e-02
+}",JavaScript,Iterator,dofactory,https://www.dofactory.com/javascript/design-patterns/iterator,"[-1.58095974e-02  5.45584643e-03  2.44846866e-02  1.55830216e-02
  -2.16295719e-02 -1.88628938e-02  3.28289382e-02  1.64426472e-02
   9.85469222e-02 -9.23552886e-02 -1.37987954e-03  5.48306182e-02
  -4.58762422e-02 -3.16701457e-02  2.13519372e-02  1.00673903e-02
@@ -29182,7 +29182,7 @@ function run() {
     john.send(""Hey, no need to broadcast"", yoko);
     paul.send(""Ha, I heard that!"");
     ringo.send(""Paul, what do you think?"", paul);
-}1",Mediator,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/mediator,"[-1.13590537e-02 -2.47746315e-02  4.37649041e-02 -1.04510318e-02
+}1",JavaScript,Mediator,dofactory,https://www.dofactory.com/javascript/design-patterns/mediator,"[-1.13590537e-02 -2.47746315e-02  4.37649041e-02 -1.04510318e-02
  -4.64603044e-02  1.22531373e-02  1.08049229e-01  3.12006287e-03
   7.91815072e-02 -4.62967418e-02  2.79552629e-03 -4.30194847e-02
  -1.98469292e-02 -1.40000321e-02  8.42765048e-02  2.03433391e-02
@@ -29335,7 +29335,7 @@ function run() {
 
     console.log(mike.name);
     console.log(john.name);
-}",Memento,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/memento,"[-2.68478435e-03  2.11586058e-02  7.50041530e-02 -1.46340756e-02
+}",JavaScript,Memento,dofactory,https://www.dofactory.com/javascript/design-patterns/memento,"[-2.68478435e-03  2.11586058e-02  7.50041530e-02 -1.46340756e-02
  -4.94009443e-02 -1.98910926e-02  4.83789407e-02  3.20083722e-02
   4.73560728e-02 -5.81735224e-02  3.82316270e-04 -5.31155616e-02
  -5.87165654e-02  1.41094886e-02  5.65424263e-02  4.82933857e-02
@@ -29477,7 +29477,7 @@ function run() {
 
     var light = new TrafficLight();
     light.start();
-}",State,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/state,"[-3.84318084e-02  7.47764204e-03  5.33167981e-02  4.29707691e-02
+}",JavaScript,State,dofactory,https://www.dofactory.com/javascript/design-patterns/state,"[-3.84318084e-02  7.47764204e-03  5.33167981e-02  4.29707691e-02
  -4.46996056e-02  1.20134493e-02  5.20474985e-02  4.29922342e-03
   8.83945972e-02 -3.10723614e-02 -8.20191577e-03 -8.12684093e-03
  -7.42055997e-02  1.74316261e-02  6.10630922e-02  5.11144586e-02
@@ -29626,7 +29626,7 @@ function run() {
     console.log(""USPS Strategy: "" + shipping.calculate(package));
     shipping.setStrategy(fedex);
     console.log(""Fedex Strategy: "" + shipping.calculate(package));
-}",Strategy,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/strategy,"[-3.93539518e-02  3.82023826e-02  2.79759709e-02  5.93452854e-03
+}",JavaScript,Strategy,dofactory,https://www.dofactory.com/javascript/design-patterns/strategy,"[-3.93539518e-02  3.82023826e-02  2.79759709e-02  5.93452854e-03
  -5.05585447e-02  1.57503039e-02  1.74376480e-02  7.96796009e-02
   3.27895246e-02  5.99727733e-04 -2.75922120e-02 -7.84200057e-02
  -6.23976067e-02 -5.66047207e-02  5.12137339e-02  9.45551787e-03
@@ -29755,7 +29755,7 @@ function run() {
     };
 
     mySql.process();
-}",Template Method,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/template-method,"[-7.35106841e-02  1.46482205e-02  2.98338104e-02  2.20946297e-02
+}",JavaScript,Template Method,dofactory,https://www.dofactory.com/javascript/design-patterns/template-method,"[-7.35106841e-02  1.46482205e-02  2.98338104e-02  2.20946297e-02
  -6.07302040e-02 -3.87234353e-02 -2.58403365e-03  8.39855522e-02
   3.33872736e-02 -1.21439074e-03 -3.01973671e-02  1.42783048e-02
  -4.80189510e-02 -1.31374430e-02  1.20350132e-02  4.02726531e-02
@@ -29910,7 +29910,7 @@ function run() {
         console.log(emp.getName() + "": $"" + emp.getSalary() +
             "" and "" + emp.getVacation() + "" vacation days"");
     }
-}",Visitor,JavaScript,dofactory,https://www.dofactory.com/javascript/design-patterns/visitor,"[-1.71405450e-02  9.45583135e-02  2.37832796e-02  1.30846454e-02
+}",JavaScript,Visitor,dofactory,https://www.dofactory.com/javascript/design-patterns/visitor,"[-1.71405450e-02  9.45583135e-02  2.37832796e-02  1.30846454e-02
  -6.20989241e-02  5.97627368e-03  6.24885187e-02  3.44489329e-02
   5.75555861e-02 -8.15751031e-02  2.45472081e-02 -6.66874871e-02
  -3.94853950e-02 -5.55631667e-02  2.79290285e-02 -6.30444661e-03
