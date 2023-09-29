@@ -214,9 +214,14 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
     patterns = []
     resources = []
     resource_names = []
+    avgs = {}
     for k, v in files.items():
         scores.append(v['score'])
         patterns.append(v['samples']['Design Pattern'])
+        if v['samples']['Design Pattern'][0] not in avgs:
+            avgs[v['samples']['Design Pattern'][0]] = [v['score']]
+        else:
+            avgs[v['samples']['Design Pattern'][0]] += [v['score']]
         # try: 
         #     pp.append(f"Name: {k.split('/')[-1]} | Score: {v['score']} | Closest: {v['samples']['Language']} {v['samples']['Design Pattern']} | Model: {v['model_out']} |")
         # except KeyError:
@@ -265,6 +270,8 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
     else:
         resource = "No resource"
         resource_name = "No resource"
+    for key in avgs.keys():
+        avgs[key] = float(sum(avgs[key])/len(avgs[key]))
 
     if verbose:
         print({
@@ -276,7 +283,9 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
         "bot_3_patterns": bot_pattern, 
         "resource": resource, 
         "resource_name": resource_name, 
-        "files": np.asarray(pp).tolist()
+        "files": np.asarray(pp).tolist(),
+        "occurance": dict(occurence),
+        "averages": avgs,
     })
     return {
         "design_pattern": bool(eval), 
@@ -287,5 +296,7 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
         "bot_3_patterns": bot_pattern, 
         "resource": resource, 
         "resource_name": resource_name,
-        "files": np.asarray(pp).tolist()
+        "files": np.asarray(pp).tolist(),
+        "occurance": dict(occurence),
+        "averages": avgs,
     }
