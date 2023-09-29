@@ -44,17 +44,26 @@ if __name__ == "__main__":
 
     
     scorer.load_ds_and_idx(0)
-    github_token = ""
+    github_token = "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"
     repo_name = "perspect-scores"
 
-    repos = scorer._get_git(github_token)
-    for repo in repos:
-        obj = scorer.designpatterns_local_score(repo_url=repos[2])
-        print(f"Design patterns secure for {repo}")
+    # repos = scorer._get_git(github_token)
+    # for repo in repos:
+    #     obj = scorer.designpatterns_local_score(repo_url=repos[2])
+    #     print(f"Design patterns secure for {repo}")
+    obj = scorer.designpatterns_local_score(repo_url="https://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@github.com/narfdre/Tug-a-Sphero.git")
 
   
     
+    # github_token = "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"
 
-    # obj = scorer.archetype_score(user_token=github_token, repo_name=repo_name)
-    # print(obj)
-    # print("archetype secure")
+    # repos = scorer._get_git(github_token)
+    # for repo in repos:
+    #     try:
+    #         print(repo[2])
+    #         obj = scorer.archetype_score(user_token=github_token, repo_name=repo[2])
+    #         print(obj)
+    #         print("archetype secure")
+    #     except Exception as e:
+    #         print(e)
+

@@ -60,7 +60,7 @@ class One_Class_To_Rule_Them_All():
 
         repos = []
         for repo in g.get_user().get_repos():
-            repos.append([f"https://{user_token}@github.com/{repo.full_name}.git", f"{'private' if repo.private else 'public'}"])
+            repos.append([f"https://{user_token}@github.com/{repo.full_name}.git", f"{'private' if repo.private else 'public'}", f"{repo.full_name}"])
             # print(dir(repo))
         return repos
 
@@ -99,7 +99,7 @@ class One_Class_To_Rule_Them_All():
         data = []
         repo = ''
         try:
-            repo = g.get_user().get_repo(repo_name)
+            repo = g.get_repo(repo_name)
         except:
             if self.verbose:
                 print(f"{repo_name} not found")
@@ -175,7 +175,7 @@ class One_Class_To_Rule_Them_All():
             '.ts',
             '.js'
             ]
-        os.system(f"git clone {repo_url[0]} curr_repo")
+        os.system(f"git clone {repo_url} curr_repo")
         contents = [f for f in os.listdir("./curr_repo/") if os.path.isfile(f)]
         files = {}
         for file in contents:
