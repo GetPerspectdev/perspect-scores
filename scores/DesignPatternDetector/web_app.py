@@ -43,7 +43,7 @@ code_prompt_template = PromptTemplate(input_variables=['code'], template=code_te
 #     )
 # code_chain = LLMChain(llm=llm, prompt=code_prompt_template)
 
-CODE_FILES = ['.cgi','.cmd','.pl','.class','.cpp','.css','.h','.html','.java','.php','.py','.ipynb','.sh','.swift']
+CODE_FILES = ('.cgi','.cmd','.pl','.class','.cpp','.css','.h','.html','.java','.php','.py','.ipynb','.sh','.swift', '.ts', '.js')
 
 def get_files(paths, file_name):
     for i in paths:
@@ -176,33 +176,42 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
             .replace(" ", "%20")
             .replace("blob/", "")
         )
-
-        if any(ext in url for ext in CODE_FILES) or url.endswith('.ts') or url.endswith('.js'):
+        if url.endswith(CODE_FILES):
             try:
                 r = requests.get(url)
                 if verbose:
                     print(f"Content: {url}\nStatus: {r.status_code}")
                 if r.status_code == 200:
+                    print('appending success')
                     file_content = BeautifulSoup(r.content, 'html.parser')
                     contents.append(file_content)
                 else:
+                    print('appending else')
                     contents.append('')
             except:
                 pass
         else:
             contents.append('')
             continue
-
         
     
     files = {}
+    print('about to go through files')
     for file, content in zip(file_urls, contents):
-        if content == '':
+        print(file)
+        print(file.split('/')[-1])
+        if file.split('/')[-1] == '__init__.py':
+            print('__init__.py')
+            print(content)
+            print(len(content))
+        if content == '' or len(content) == 0:
              continue
+        print(f"Detecting score for: {file.split('/')[-1]}")
         embed = embedder.embed(content)
         query = np.array(embed, dtype=np.float32)
         score, samples = dataset.get_nearest_examples('embedding', query, k=knn)
         files[file] = {'score': score, 'samples': samples, 'content': content, 'llm_out': ''}
+        print(f"Score: {score} {file.split('/')[-1]}")
         if verbose:
             print(f"Score: {score} {file.split('/')[-1]}")
         # if score <= 1.3 and score >= 1.1:
@@ -258,8 +267,8 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
     eval = score>0.75
     top_pattern = "nothing"
     bot_pattern = "nothing"
+    occurence = Counter()
     if len(patterns) > 0:
-        occurence = Counter()
         for i in patterns:
             occurence.update(i)
         top_pattern = occurence.most_common(3)
@@ -275,18 +284,19 @@ def get_github(repo_url, branch="main", verbose=False, dataset=ds):
 
     if verbose:
         print({
-        "design_pattern": eval, 
-        "repo_url": repo_url, 
-        "num_files": num_files, 
-        "overall_score": str(score), 
-        "top_3_patterns": top_pattern,
-        "bot_3_patterns": bot_pattern, 
-        "resource": resource, 
-        "resource_name": resource_name, 
-        "files": np.asarray(pp).tolist(),
-        "occurance": dict(occurence),
-        "averages": avgs,
-    })
+            "design_pattern": eval, 
+            "repo_url": repo_url, 
+            "num_files": num_files, 
+            "overall_score": str(score), 
+            "top_3_patterns": top_pattern,
+            "bot_3_patterns": bot_pattern, 
+            "resource": resource, 
+            "resource_name": resource_name, 
+            "files": np.asarray(pp).tolist(),
+            "occurance": dict(occurence),
+            "averages": avgs,
+        })
+    
     return {
         "design_pattern": bool(eval), 
         "repo_url": repo_url, 
