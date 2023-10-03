@@ -1,3 +1,4 @@
+*.gguf
 tokens.txt
 test_out*
 .DS_Store
