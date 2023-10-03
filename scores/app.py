@@ -1,6 +1,6 @@
 from langchain import LlamaCpp, SagemakerEndpoint, PromptTemplate, LLMChain
 from langchain.llms.sagemaker_endpoint import LLMContentHandler
-from gpt4all import Embed4All
+from sentence_transformers import SentenceTransformer
 from datasets import load_dataset
 import numpy as np
 
@@ -19,7 +19,7 @@ class One_Class_To_Rule_Them_All():
                  the: str, 
                  darkness: str, 
                  bind: bool, 
-                 them: Embed4All):
+                 them: SentenceTransformer):
         self.llm = and_in
         self.ds_folder = the
         self.index_folder = darkness
@@ -27,6 +27,9 @@ class One_Class_To_Rule_Them_All():
         self.embedder = them
         if self.verbose:
             print("Loaded init!")
+
+    def __repr__(self) -> str:
+        return f"One Class To Rule Them All and_in the darkness bind them\n{self.llm}\n{self.embedder}"
 
     def load_ds_and_idx(self, idx):
         files = os.listdir(self.ds_folder)
@@ -43,11 +46,11 @@ class One_Class_To_Rule_Them_All():
         #     print(f"Could not load {files[idx]}")
 
     def embed_documents(self, examples):
-        embedding = self.embedder.embed(examples['text'])
+        embedding = self.embedder.encode(examples['text'])
         return {'embedding': embedding}
 
     def get_relevant_documents(self, query: str, knn: int):
-        embedding = self.embedder.embed(query)
+        embedding = self.embedder.encode(query)
         q = np.array(embedding, dtype=np.float32)
         _, samples = self.vectorDB.get_nearest_examples("embedding", q, k=knn)
         return [samples]
@@ -63,6 +66,62 @@ class One_Class_To_Rule_Them_All():
             repos.append([f"https://{user_token}@github.com/{repo.full_name}.git", f"{'private' if repo.private else 'public'}", f"{repo.full_name}"])
             # print(dir(repo))
         return repos
+    
+    def _get_slack_diff(self, user_id: str = None, slack_token: str = None):
+        import slack_sdk
+        import pandas as pd
+
+        client=slack_sdk.WebClient(token=slack_token)
+        dm_channels_response = client.conversations_list(types="im")
+        
+        all_messages = {}
+
+        if self.verbose:
+            print("Getting Diff")
+
+        for channel in dm_channels_response["channels"]:
+            # Get conversation history
+            history_response = client.conversations_history(channel=channel["id"])
+
+            # Store messages
+            all_messages[channel["id"]] = history_response["messages"]
+
+        txts = []
+
+        for channel_id, messages in all_messages.items():
+            for message in messages:
+                try:
+                    text = message["text"]
+                    user = message["user"]
+                    timestamp = message["ts"]
+                    txts.append([timestamp,user,text])
+                except:
+                    pass
+        new_df = pd.DataFrame(txts)
+        new_df.columns =  ['timestamp','user','text']
+        self_user = new_df['user'].value_counts().idxmax()
+        new_df = new_df[new_df.user == self_user]
+
+        if self.verbose:
+            print("New Messages collected, comparing and concatenating...")
+
+        try:
+            files = os.listdir("./scores/user_slack_data/")
+            file = [i for i in files if user_id in i]
+            old_df = pd.read_csv(f"./scores/user_slack_data/{file[0]}")
+            old_df = old_df['text'].values.tolist()
+            
+            df = pd.concat([new_df, old_df], ignore_index=True).drop_duplicates('timestamp')
+            messages = df['text'].values.tolist()
+        except Exception as e:
+            print(e)
+            df = new_df
+            messages = df['text'].values.tolist()
+
+        if self.verbose:
+            print("Done getting messages!")
+
+        return df, messages
 
     def archetype_score(self, user_token: str, repo_name: str):
         from github import Github, Auth
@@ -181,7 +240,7 @@ class One_Class_To_Rule_Them_All():
         for file in contents:
             with open(file, 'r') as f:
                 content = f.read()
-                embed = self.embedder.embed(content)
+                embed = self.embedder.encode(content)
                 query = np.array(embed, dtype=np.float32)
                 score, samples = self.vectorDB.get_nearest_examples('embedding', query, k=1)
                 files[file] = {
@@ -331,6 +390,8 @@ class One_Class_To_Rule_Them_All():
             df.to_csv(f"./scores/user_slack_data/{self_user}_messages.csv")
 
             messages = df['text'].values.tolist()
+        elif user_id and slack_token:
+            df, messages = self._get_slack_diff(user_id=user_id, slack_token=slack_token)
         else:
             files = os.listdir("./scores/user_slack_data/")
             file = [i for i in files if user_id in i]
@@ -341,10 +402,10 @@ class One_Class_To_Rule_Them_All():
         for message in messages:
             message = str(message)
             if len(message)>0:
-                embed = self.embedder.embed(message)
+                embed = self.embedder.encode(message)
                 embeddings_list.append(embed)
             else:
-                embed = self.embedder.embed("Likely an emoji")
+                embed = self.embedder.encode("Likely an emoji")
                 embeddings_list.append(embed)
         df['embedding'] = embeddings_list
 
@@ -356,9 +417,9 @@ class One_Class_To_Rule_Them_All():
             if self.verbose:
                 print(f"Searching VectorDB for {message[:10]}...")
             if len(message)>0:
-                db_query = self.embedder.embed(message)
+                db_query = self.embedder.encode(message)
             else:
-                db_query = self.embedder.embed("Emoji")
+                db_query = self.embedder.encode("Emoji")
             db_query = np.array(db_query, dtype=np.float32)
             _, context_list = self.vectorDB.get_nearest_examples("embedding", db_query, k=3)
 
@@ -393,6 +454,7 @@ class One_Class_To_Rule_Them_All():
             
             if self.verbose:
                 print(f"Message token count: {num_tokens}")
+                print(f"examples_from_db: {score_string}\ncurr_message: {message}")
             obj = chain.run({
                 "examples": score_string,
                 "message_history": ",\n".join(message_history) if len(message_history) > 1 else dumb_message,
@@ -401,7 +463,7 @@ class One_Class_To_Rule_Them_All():
             message_history.append(message)
             scores.append(obj)
             if self.verbose:
-                print(f"Finished Message {i} of {len(messages)}")
+                print(f"Finished Message {i} of {len(messages)}\n{i//len(messages)}% complete")
             i += 1
 
         df['scores'] = scores
