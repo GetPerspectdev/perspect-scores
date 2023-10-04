@@ -9,6 +9,7 @@ from collections import Counter
 
 from urllib.parse import urljoin
 import os
+import subprocess
 from shutil import rmtree
 import json
 import requests
@@ -215,7 +216,7 @@ class One_Class_To_Rule_Them_All():
         obj = json.dumps({"archetype": archetype})
         return obj
     
-    def designpatterns_local_score_beta(self, user_token: str):
+    def _designpatterns_local_score_archive(self, user_token: str):
         from github import Github, Auth
         import base64
 
@@ -237,7 +238,9 @@ class One_Class_To_Rule_Them_All():
                 ".txt",
                 ".toml",
                 ".in",
-                ".rst"
+                ".rst",
+                ".jpg",
+                ""
             )
 
             files = {}
@@ -342,38 +345,26 @@ class One_Class_To_Rule_Them_All():
         return repos
 
     def designpatterns_local_score(self, repo_url: str = ""):
-        CODE_FILES = [
-            '.cgi',
-            '.cmd',
-            '.pl',
-            '.class',
-            '.cpp',
-            '.css',
-            '.h',
-            '.html',
-            '.java',
-            '.php',
-            '.py',
-            '.ipynb',
-            '.sh',
-            '.swift',
-            '.ts',
-            '.js'
-            ]
-        os.system(f"git clone --depth 1 {repo_url} curr_repo")
-        contents = [f for f in os.listdir("./curr_repo/") if os.path.isfile(f)]
+        repo_path = "/tmp/curr_repo"
+        rmtree(repo_path, ignore_errors=True)
+        result = subprocess.run(["git", "clone", "--depth=1", repo_url, repo_path])
+        repo_files = [os.path.join(repo_path, f) for f in os.listdir(repo_path)]
+        contents = [f for f in repo_files if os.path.isfile(f)]
         files = {}
         for file in contents:
-            with open(file, 'r') as f:
-                content = f.read()
-                embed = self.embedder.encode(content)
-                query = np.array(embed, dtype=np.float32)
-                score, samples = self.vectorDB.get_nearest_examples('embedding', query, k=1)
-                files[file] = {
-                    'score': score, 
-                    'samples': samples, 
-                    'content': content, 
-                    }
+            try:
+                with open(file, 'r') as f:
+                    content = f.read()
+                    embed = self.embedder.encode(content)
+                    query = np.array(embed, dtype=np.float32)
+                    score, samples = self.vectorDB.get_nearest_examples('embedding', query, k=1)
+                    files[file] = {
+                        'score': score, 
+                        'samples': samples, 
+                        'content': content, 
+                        }
+            except UnicodeDecodeError:
+                pass # binary or ascii file
 
         pp = []
         scores = []
@@ -383,13 +374,12 @@ class One_Class_To_Rule_Them_All():
         for k, v in files.items():
             scores.append(v['score'])
             patterns.append(v['samples']['Design Pattern'])
+
             if v['samples']['Design Pattern'][0] not in avgs:
                 avgs[v['samples']['Design Pattern'][0]] = [v['score']]
             else:
                 avgs[v['samples']['Design Pattern'][0]] += [v['score']]
-            # try: 
-            #     pp.append(f"Name: {k.split('/')[-1]} | Score: {v['score']} | Closest: {v['samples']['Language']} {v['samples']['Design Pattern']} | Model: {v['model_out']} |")
-            # except KeyError:
+
             if v['score'] > 1.0:
                 pp.append(
                     {
@@ -431,7 +421,7 @@ class One_Class_To_Rule_Them_All():
         for key in avgs.keys():
             avgs[key] = float(sum(avgs[key])/len(avgs[key]))
         
-        rmtree("./curr_repo", ignore_errors=True)
+        rmtree("/tmp/curr_repo", ignore_errors=True)
 
         if self.verbose:
             print({
@@ -445,7 +435,7 @@ class One_Class_To_Rule_Them_All():
             "occurance": dict(occurence),
             "averages": avgs,
         })
-        return json.dumps({
+        return {
             "design_pattern": bool(eval), 
             "repo_url": repo_url, 
             "overall_score": str(score), 
@@ -455,7 +445,7 @@ class One_Class_To_Rule_Them_All():
             "files": np.asarray(pp).tolist(),
             "occurance": dict(occurence),
             "averages": avgs,
-        })
+        }
     
     def professionalism_score(self, slack_token: str, user_id=None):
         if user_id == None:
@@ -527,6 +517,7 @@ class One_Class_To_Rule_Them_All():
         embeddings_list = []
         for message in messages:
             message = str(message)
+            message = message.encode("ascii", 'ignore').decode('utf-8').strip()
             if len(message)>0:
                 embed = self.embedder.encode(message)
                 embeddings_list.append(embed)
@@ -540,6 +531,7 @@ class One_Class_To_Rule_Them_All():
         i = 1
         for message in messages:
             message = str(message)
+            message = message.encode("ascii", 'ignore').decode('utf-8').strip()
             if self.verbose:
                 print(f"Searching VectorDB for {message[:10]}...")
             if len(message)>0:
