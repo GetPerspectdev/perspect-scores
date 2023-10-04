@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
     
     scorer.load_ds_and_idx(0)
-    scorer.designpatterns_local_score("https://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@github.com/laurenllivi/capstone.git")
+    scorer.designpatterns_local_score("https://@github.com/IMJONEZZ/NLP.git")
 
     # repo_name = "perspect-scores"
 
