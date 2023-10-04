@@ -214,6 +214,132 @@ class One_Class_To_Rule_Them_All():
 
         obj = json.dumps({"archetype": archetype})
         return obj
+    
+    def designpatterns_local_score_beta(self, user_token: str):
+        from github import Github, Auth
+        import base64
+
+        if self.verbose:
+            print("Authenticating...")
+        auth = Auth.Token(user_token)
+        g = Github(auth=auth)
+        user_login = g.get_user().login
+
+        
+        repos = {}
+        for repo in g.get_user().get_repos():
+            if self.verbose:
+                print(f"Analyzing {repo.full_name}")
+
+            skips = (
+                ".md",
+                ".yml",
+                ".txt",
+                ".toml",
+                ".in",
+                ".rst"
+            )
+
+            files = {}
+            pp = []
+            scores = []
+            patterns = []
+            resources = []
+            avgs = {}
+            repo = g.get_repo("PyGithub/PyGithub")
+            contents = repo.get_contents("")
+            while contents:
+                file_content = contents.pop(0)
+                if file_content.type == "dir":
+                    contents.extend(repo.get_contents(file_content.path))
+                elif file_content.name.startswith(".") or file_content.name.endswith(skips):
+                    continue
+                else:
+                    if self.verbose:
+                        print(f"File: {file_content.name}")
+                    readable = base64.b64decode(file_content.content)
+                    embed = self.embedder.encode(str(readable))
+                    query = np.array(embed, dtype=np.float32)
+                    score, samples = self.vectorDB.get_nearest_examples('embedding', query, k=1)
+                    files[file_content.name] = {
+                        'score': score, 
+                        'samples': samples, 
+                        'content': readable, 
+                    }
+            for k, v in files.items():
+                scores.append(v['score'])
+                patterns.append(v['samples']['Design Pattern'])
+                if v['samples']['Design Pattern'][0] not in avgs:
+                    avgs[v['samples']['Design Pattern'][0]] = [v['score']]
+                else:
+                    avgs[v['samples']['Design Pattern'][0]] += [v['score']]
+                # try: 
+                #     pp.append(f"Name: {k.split('/')[-1]} | Score: {v['score']} | Closest: {v['samples']['Language']} {v['samples']['Design Pattern']} | Model: {v['model_out']} |")
+                # except KeyError:
+                if v['score'] > 1.0:
+                    pp.append(
+                        {
+                            "name": k.split('/')[-1], 
+                            "score": float(v['score']), 
+                            "language": v['samples']['Language'][0], 
+                            "pattern": v['samples']['Design Pattern'][0],
+                            "resource": v['samples']['Unnamed: 4'][0],
+                        }
+                    )
+                else:
+                    pp.append(
+                        {
+                            "name": k.split('/')[-1], 
+                            "score": float(v['score']), 
+                            "language": v['samples']['Language'][0], 
+                            "pattern": v['samples']['Design Pattern'][0],
+                        }
+                    )
+            if self.verbose:
+                print("Getting Average Score and Highest Pattern Likelihood")
+            score = float(0)
+            if len(scores) > 0:
+                score = np.mean(scores)
+            eval = score>0.75
+            top_pattern = "nothing"
+            bot_pattern = "nothing"
+            if len(patterns) > 0:
+                occurence = Counter()
+                for i in patterns:
+                    occurence.update(i)
+                top_pattern = occurence.most_common(3)
+                bot_pattern = occurence.most_common()[-3:]
+            if len(resources) > 0:
+                resource = max(resources, key=resources.count)
+            else:
+                resource = "No resource"
+            for key in avgs.keys():
+                avgs[key] = float(sum(avgs[key])/len(avgs[key]))
+
+            if self.verbose:
+                print({
+                "design_pattern": bool(eval), 
+                "repo_url": repo.full_name, 
+                "overall_score": str(score), 
+                "top_3_patterns": top_pattern,
+                "bot_3_patterns": bot_pattern, 
+                "resource": resource, 
+                "files": np.asarray(pp).tolist(),
+                "occurance": dict(occurence),
+                "averages": avgs,
+            })
+            repos[repo.full_name] = ({
+                "design_pattern": bool(eval), 
+                "repo_url": repo.full_name, 
+                "overall_score": str(score), 
+                "top_3_patterns": top_pattern,
+                "bot_3_patterns": bot_pattern, 
+                "resource": resource, 
+                "files": np.asarray(pp).tolist(),
+                "occurance": dict(occurence),
+                "averages": avgs,
+            })
+        return repos
 
     def designpatterns_local_score(self, repo_url: str = ""):
         CODE_FILES = [
@@ -234,7 +360,7 @@ class One_Class_To_Rule_Them_All():
             '.ts',
             '.js'
             ]
-        os.system(f"git clone {repo_url} curr_repo")
+        os.system(f"git clone --depth 1 {repo_url} curr_repo")
         contents = [f for f in os.listdir("./curr_repo/") if os.path.isfile(f)]
         files = {}
         for file in contents:

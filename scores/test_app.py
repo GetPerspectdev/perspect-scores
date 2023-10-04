@@ -40,26 +40,27 @@ if __name__ == "__main__":
         them=the_forge
     )
 
-    scorer.load_ds_and_idx(1)
-    print("Loaded embeddings")
+    # scorer.load_ds_and_idx(1)
+    # print("Loaded embeddings")
 
-    obj = scorer.professionalism_score(slack_token=bennett_slack_token, user_id="U03FGKV2ML")
-    #print(obj)
-    print("professionalism secure")
+    # obj = scorer.professionalism_score(slack_token=bennett_slack_token, user_id="U03FGKV2ML")
+    # #print(obj)
+    # print("professionalism secure")
 
     
     scorer.load_ds_and_idx(0)
-    
-    repo_name = "perspect-scores"
+    scorer.designpatterns_local_score_beta("")
 
-    repos = scorer._get_git(bennett_github_token)
-    for repo in repos:
-        design_obj = scorer.designpatterns_local_score(repo_url=repo[0])
-        print(f"Design patterns secure for {repo[2]}")
-        archetype_obj = scorer.archetype_score(user_token=bennett_github_token, repo_name=repo[2])
-        print("archetype secure")
-        print(f"Design: {design_obj}\nArch: {archetype_obj}")
-    #obj = scorer.designpatterns_local_score(repo_url="https://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@github.com/narfdre/Tug-a-Sphero.git")
+    # repo_name = "perspect-scores"
+
+    # repos = scorer._get_git(bennett_github_token)
+    # for repo in repos:
+    #     design_obj = scorer.designpatterns_local_score(repo_url=repo[0])
+    #     print(f"Design patterns secure for {repo[2]}")
+        # archetype_obj = scorer.archetype_score(user_token=bennett_github_token, repo_name=repo[2])
+        # print("archetype secure")
+        # print(f"Design: {design_obj}\nArch: {archetype_obj}")
+    #obj = scorer.designpatterns_local_score(repo_url="https://@github.com/narfdre/Tug-a-Sphero.git")
 
 
     
