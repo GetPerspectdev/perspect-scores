@@ -75,14 +75,14 @@ def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=None,
             soup = BeautifulSoup(r.content, 'html.parser')
             if len(soup.find_all('a')) > 0:
                 for j in soup.find_all('a'):
-                        try:
-                            if f"tree/{branch}" in j.get('href'):
-                                url = urljoin(i, j.get('href'))
-                                if url not in url_tree:
-                                    url_tree.append(url)
-                        except TypeError:
-                            if verbose:
-                                print(f"Error on original repo")
+                    try:
+                        if f"tree/{branch}" in j.get('href'):
+                            url = urljoin(i, j.get('href'))
+                            if url not in url_tree:
+                                url_tree.append(url)
+                    except TypeError:
+                        if verbose:
+                            print(f"Error on original repo")
             else:
               stuff = json.loads(str(soup))
               try:
@@ -91,7 +91,7 @@ def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=None,
                         if f"{i.split('/')[-1]}" in j['path'] and len(j['path'].split(".")) == 1:
                             url = f"{i}/{j['name']}"
                             if url not in url_tree:
-                                    url_tree.append(url)
+                                url_tree.append(url)
                     except TypeError:
                         if verbose:
                             print(f"Error on {j}")

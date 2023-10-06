@@ -106,25 +106,34 @@ def get_github(repo_url, dev_key='', branch="main", verbose=False, dataset=ds, l
             if verbose:
                 print(f"Creating url tree: {i}")
             soup = BeautifulSoup(r.content, 'html.parser')
+            print('got the soup')
             if len(soup.find_all('a')) > 0:
+                print('has more than an a tag??? I guess?')
                 for j in soup.find_all('a'):
                         try:
                             if f"tree/{branch}" in j.get('href'):
+                                print('looking for href')
                                 url = urljoin(i, j.get('href'))
+                                print('joined the url')
                                 if url not in url_tree:
+                                    print('not in tree')
                                     url_tree.append(url)
                         except TypeError:
                             if verbose:
                                 print(f"Error on original repo")
             else:
               stuff = json.loads(str(soup))
+              print('got the json')
               try:
+                print('getting items')
                 for j in stuff['payload']['tree']['items']:
                     try:
                         if f"{i.split('/')[-1]}" in j['path'] and len(j['path'].split(".")) == 1:
+                            print('idk what this is but we are here')
                             url = f"{i}/{j['name']}"
                             if url not in url_tree:
-                                    url_tree.append(url)
+                                print('again not in tree')
+                                url_tree.append(url)
                     except TypeError:
                         if verbose:
                             print(f"Error on {j}")
